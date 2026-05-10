@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+
+# Vite build output
+dist/
+build/
+
+# Generated artifacts (regenerated from source — don't commit binaries)
+slide-frames/
+native-preview/
+video-frames/
+*.mp4
+*.pdf
+
+# Generated decks — large binaries; produce on demand via build scripts
+Boardirector-NimbusSummIT2026.pptx
+Boardirector-NimbusSummIT2026-native.pptx
+Boardirector-NimbusSummIT2026.pdf
+
+# PowerPoint lock/temp files
+~$*.pptx
+~$*.docx
+~$*.xlsx
+*.tmp
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS / Editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+
+# Claude session data (local-only, sensitive)
+.claude/
+
+# Speech scripts and Confluence exports — keep out of public repo
+speech-script*.docx
+speech-script*.md
+*-speech-*.docx
+cue-cards.html

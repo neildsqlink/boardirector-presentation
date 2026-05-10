@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generator: Adobe Illustrator 26.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 725.8 727.3" style="enable-background:new 0 0 725.8 727.3;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_00000031186150640399875050000007474014735982847670_);}
+	.st1{fill:url(#SVGID_00000153675308434193440630000003008070746474954394_);}
+	.st2{clip-path:url(#SVGID_00000152960436786102804850000008371861060084550822_);}
+	.st3{fill:url(#SVGID_00000183927728984943534730000001142837030140497844_);}
+</style>
+<g>
+	<g>
+		<defs>
+			<path id="SVGID_1_" d="M349.3,55.5C179.2,63.1,47.5,207.1,55,377.2S206.6,679,376.7,671.4c81.7-3.6,158.7-39.6,213.9-100     c-44.7,32.1-98.5,49.2-153.5,48.8c-146.9,0-265.9-119.1-265.9-265.9S290.1,88.5,437,88.5c32.6-0.2,64.9,5.8,95.3,17.7     C485.9,75.3,432,57.8,376.4,55.5H349.3z"></path>
+		</defs>
+		<clipPath id="SVGID_00000137852112157283935090000012334229467637821329_">
+			<use xlink:href="#SVGID_1_" style="overflow:visible;"></use>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000137852112157283935090000012334229467637821329_);">
+			
+				<linearGradient id="SVGID_00000131360268602656767380000011616848506966300311_" gradientUnits="userSpaceOnUse" x1="-568.9038" y1="517.8017" x2="-565.7817" y2="517.8017" gradientTransform="matrix(172.32 0 0 -172.32 98097.7578 89591.5)">
+				<stop offset="0" style="stop-color:#1C206E"></stop>
+				<stop offset="6.000000e-02" style="stop-color:#1C206E"></stop>
+				<stop offset="0.1" style="stop-color:#1B2E83"></stop>
+				<stop offset="0.19" style="stop-color:#1A48AB"></stop>
+				<stop offset="0.28" style="stop-color:#195CCA"></stop>
+				<stop offset="0.36" style="stop-color:#196BE0"></stop>
+				<stop offset="0.45" style="stop-color:#1874ED"></stop>
+				<stop offset="0.52" style="stop-color:#1877F2"></stop>
+				<stop offset="1" style="stop-color:#1877F2"></stop>
+			</linearGradient>
+			
+				<rect x="54.6" y="55.5" style="fill:url(#SVGID_00000131360268602656767380000011616848506966300311_);" width="536.5" height="616.7"></rect>
+		</g>
+	</g>
+	<g>
+		<defs>
+			<path id="SVGID_00000132049523720938516440000001707747010330410401_" d="M171.1,354.4c0,146.9,119,265.9,265.9,265.9l0,0     c55.1,0.3,108.8-16.7,153.5-48.8c51.9-56.7,80.7-130.8,80.6-207.7c0.1-13.4-0.7-26.7-2.4-40c-5.3-39.2-17.8-77.2-37.1-111.8     l-115.3,38.2l-172.9,57.7l37.1,111.8l173-57.7v1.8c0.1,105.6-85.4,191.3-191,191.4c-105.6,0.1-191.3-85.4-191.4-191     C171,275.5,231.9,198.4,318.1,178l215.3-71.2h-1.2c-30.4-11.8-62.7-17.8-95.3-17.6C290.4,89.1,171.4,207.7,171.1,354.4"></path>
+		</defs>
+		<clipPath id="SVGID_00000036240013235633190190000013429513554385108902_">
+			<use xlink:href="#SVGID_00000132049523720938516440000001707747010330410401_" style="overflow:visible;"></use>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000036240013235633190190000013429513554385108902_);">
+			
+				<linearGradient id="SVGID_00000101089464438456992480000000501224234137222539_" gradientUnits="userSpaceOnUse" x1="-573.7542" y1="517.7565" x2="-570.632" y2="517.7565" gradientTransform="matrix(-133.6149 92.5193 92.5193 133.6149 -123933.3516 -15888.1689)">
+				<stop offset="0" style="stop-color:#1C206E"></stop>
+				<stop offset="6.000000e-02" style="stop-color:#1C206E"></stop>
+				<stop offset="0.13" style="stop-color:#1B2E83"></stop>
+				<stop offset="0.29" style="stop-color:#1A48AB"></stop>
+				<stop offset="0.45" style="stop-color:#195CCA"></stop>
+				<stop offset="0.61" style="stop-color:#196BE0"></stop>
+				<stop offset="0.76" style="stop-color:#1874ED"></stop>
+				<stop offset="0.89" style="stop-color:#1877F2"></stop>
+				<stop offset="1" style="stop-color:#1877F2"></stop>
+			</linearGradient>
+			<polygon style="fill:url(#SVGID_00000101089464438456992480000000501224234137222539_);" points="-78,260.3 509.1,-146.2      920.3,447.5 333.1,854.1    "></polygon>
+		</g>
+	</g>
+</g>
+</svg>
