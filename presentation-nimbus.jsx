@@ -1,5 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 
+// Resolve a public-folder path to the deployed base URL so assets work both
+// at "/" (npm run dev) and under "/nimbus2026/" (GitHub Pages).
+const A = (p) => `${import.meta.env.BASE_URL}${p.replace(/^\//, "")}`;
+
 /* ─── Brand Tokens (matches STKI-light) ─── */
 const B = {
   bigStone: "#172134",
@@ -105,7 +109,7 @@ const SLIDES = [
       { icon: "check", text: "משימות עם אחראי, דדליין, ומעקב אוטומטי", color: "teal" },
       { icon: "chart", text: "דוחות וייצוא — נוכחות, החלטות, משימות, הרשאות. מוכנות מלאה לביקורת.", color: "orange" },
     ],
-    screenshot: "/screenshots/meetings.png",
+    screenshot: A("/screenshots/meetings.png"),
   },
   // 8. DECISION TRACKER — proves "everything connected"
   {
@@ -113,7 +117,7 @@ const SLIDES = [
     type: "decision-tracker",
     title: "כל ההחלטות במקום אחד",
     subtitle: "מעקב מלא אחרי כל החלטה — מהדיון, דרך המשימות, ועד הביצוע",
-    screenshot: "/screenshots/decision-tracker.png",
+    screenshot: A("/screenshots/decision-tracker.png"),
     highlights: [
       { icon: "target", text: "כל החלטה מקושרת לוועדה, לנושא ולישיבה" },
       { icon: "user", text: "אחראי, סטטוס, ותאריך יעד לכל פריט" },
@@ -128,7 +132,7 @@ const SLIDES = [
     type: "dashboard",
     title: "הכול בתצוגה אחת",
     subtitle: "הדשבורד האישי — כל מה שדורש את תשומת הלב שלכם, במקום אחד",
-    screenshot: "/screenshots/dashboard.png",
+    screenshot: A("/screenshots/dashboard.png"),
     highlights: [
       { icon: "calendar", text: "ישיבות קרובות עם גישה מהירה לחומרים" },
       { icon: "check", text: "המשימות שלי — לפי דחיפות וסטטוס" },
@@ -169,7 +173,7 @@ const SLIDES = [
     type: "meeting-page-ai",
     title: "ישיבה נוצרת בדקות",
     subtitle: "סדר היום נבנה אוטומטית — לפי תוכנית עבודה, רגולציה, וועדה",
-    screenshot: "/screenshots/meeting-page.png",
+    screenshot: A("/screenshots/meeting-page.png"),
     aiLabel: "AI Agenda Builder",
     aiHeadline: "בונה סדר יום אוטומטי",
     aiCaption: "מבוסס על תוכנית עבודה ודרישות רגולציה",
@@ -187,7 +191,7 @@ const SLIDES = [
     type: "meeting-book-chat",
     title: "שאלו את המסמכים",
     subtitle: "AI Assistant בתוך תיק הישיבה — תשובות מיידיות על כל מסמך, פרוטוקול, או החלטה",
-    screenshot: "/screenshots/meeting-book.png",
+    screenshot: A("/screenshots/meeting-book.png"),
     aiLabel: "AI Document Assistant",
     question: "מה הוחלט בנושא תקציב 2026 בישיבה האחרונה?",
     answer: "בישיבת הדירקטוריון מ-12.4.2026 אושר תקציב של 47.3M ש״ח לשנת 2026. ההחלטה התקבלה ברוב של 7 מתוך 8 חברים.",
@@ -390,7 +394,7 @@ function FooterBar() {
         <span style={{ fontSize: 10, color: "rgba(255,255,255,0.45)", fontFamily: `'${B.fontEn}', sans-serif`, letterSpacing: 2, fontWeight: 400 }}>
           A PRODUCT OF
         </span>
-        <img src="/sqlink-white.png" alt="SQLink" style={{ height: 18, width: "auto", display: "block", opacity: 0.9 }} />
+        <img src={A("/sqlink-white.png")} alt="SQLink" style={{ height: 18, width: "auto", display: "block", opacity: 0.9 }} />
       </div>
     </div>
   );
@@ -913,7 +917,7 @@ function HeroEvent({ slide, active, accent, circlePos }) {
         />
         <div style={{ marginTop: 50, display: "flex", alignItems: "center", justifyContent: "center", gap: 14, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 900ms" }}>
           <div style={{ width: 56, height: 56, borderRadius: "50%", overflow: "hidden", boxShadow: `0 4px 14px rgba(23,33,52,0.18), 0 0 0 2px ${B.white}, 0 0 0 4px ${B.orange}30`, flexShrink: 0 }}>
-            <img src="/avatar-neil.png" alt={slide.speaker} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            <img src={A("/avatar-neil.png")} alt={slide.speaker} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
           </div>
           <div style={{ textAlign: "right" }}>
             <div style={{ fontSize: 17, fontWeight: 600, color: B.bigStone }}>{slide.speaker}</div>
