@@ -237,7 +237,37 @@ const SLIDES = [
     buttonLabel: "שלח לכל המשתתפים",
     sentLabel: "נשלח",
   },
-  // 12. DECISION TRACKER — proves "everything connected"
+  // 12. MEETING BOOK + AI CHAT
+  {
+    id: "meeting-book-chat",
+    type: "meeting-book-chat",
+    title: "שאלו את המסמכים",
+    subtitle: "AI Assistant בתוך תיק הישיבה — תשובות מיידיות על כל מסמך, פרוטוקול, או החלטה",
+    screenshot: A("/screenshots/meeting-book.png"),
+    aiLabel: "AI Document Assistant",
+    question: "מה הוחלט בנושא תקציב 2026 בישיבה האחרונה?",
+    answer: "בישיבת הדירקטוריון מ-12.4.2026 אושר תקציב של 47.3M ש״ח לשנת 2026. ההחלטה התקבלה ברוב של 7 מתוך 8 חברים.",
+  },
+  // 13. MINUTES APPROVAL — automated sign-off flow
+  {
+    id: "minutes-approval",
+    type: "minutes-approval",
+    title: "אישור פרוטוקול דיגיטלי",
+    subtitle: "בחרו חברים — שלחו לחתימה דיגיטלית — קבלו עדכון בזמן אמת",
+    screenshot: A("/screenshots/meeting-page.png"),
+    panelTitle: "אישור פרוטוקול",
+    meetingName: "ישיבת דירקטוריון · Q1 2026",
+    members: [
+      { name: "דנה לוי", role: "יו״ר" },
+      { name: "אבי כהן", role: "דירקטור" },
+      { name: "רונית גולן", role: "דירקטורית" },
+      { name: "משה ברק", role: "דירקטור" },
+      { name: "שרה דוד", role: "מבקרת" },
+    ],
+    buttonLabel: "שלח לחתימה דיגיטלית",
+    sentLabel: "נשלח לחתימה",
+  },
+  // 14. DECISION TRACKER — proves "everything connected"
   {
     id: "decision-tracker",
     type: "decision-tracker",
@@ -280,37 +310,7 @@ const SLIDES = [
       { icon: "chart", text: "מבט מלא על הפעילות בכל הוועדות" },
     ],
   },
-  // 10. MINUTES APPROVAL — automated sign-off flow
-  {
-    id: "minutes-approval",
-    type: "minutes-approval",
-    title: "אישור פרוטוקול דיגיטלי",
-    subtitle: "בחרו חברים — שלחו לחתימה דיגיטלית — קבלו עדכון בזמן אמת",
-    screenshot: A("/screenshots/meeting-page.png"),
-    panelTitle: "אישור פרוטוקול",
-    meetingName: "ישיבת דירקטוריון · Q1 2026",
-    members: [
-      { name: "דנה לוי", role: "יו״ר" },
-      { name: "אבי כהן", role: "דירקטור" },
-      { name: "רונית גולן", role: "דירקטורית" },
-      { name: "משה ברק", role: "דירקטור" },
-      { name: "שרה דוד", role: "מבקרת" },
-    ],
-    buttonLabel: "שלח לחתימה דיגיטלית",
-    sentLabel: "נשלח לחתימה",
-  },
-  // 15. MEETING BOOK + AI CHAT
-  {
-    id: "meeting-book-chat",
-    type: "meeting-book-chat",
-    title: "שאלו את המסמכים",
-    subtitle: "AI Assistant בתוך תיק הישיבה — תשובות מיידיות על כל מסמך, פרוטוקול, או החלטה",
-    screenshot: A("/screenshots/meeting-book.png"),
-    aiLabel: "AI Document Assistant",
-    question: "מה הוחלט בנושא תקציב 2026 בישיבה האחרונה?",
-    answer: "בישיבת הדירקטוריון מ-12.4.2026 אושר תקציב של 47.3M ש״ח לשנת 2026. ההחלטה התקבלה ברוב של 7 מתוך 8 חברים.",
-  },
-  // 13. AI CAPABILITIES — recap of OTHER AI capabilities (beyond the two demos)
+  // AI CAPABILITIES — recap of OTHER AI capabilities (beyond the two demos)
   {
     id: "ai-capabilities",
     type: "ai-capabilities",
@@ -386,7 +386,7 @@ const SLIDES = [
     subtitle: "Boardirector · ניהול חכם של ועדות וישיבות",
     cta: "בואו לביתן שלנו לראות את המערכת בפעולה",
     cta2: "או תאמו דמו אישי מותאם לארגון שלכם",
-    contact: { email: "neild@sqlink.com", site: "boardirector.com" },
+    contact: { email: "neild@sqlink.com", site: "boardirector.co.il" },
     speaker: "ניל דהאן · VP Product",
   },
 ];
@@ -439,6 +439,47 @@ const CIRCLE_POS = {
 
 const tone = (k) => B[k] || k;
 
+/* QR matrix for https://www.linkedin.com/in/neil-dahan/ (errorCorrectionLevel: H) */
+const QR_LINKEDIN = [
+  "1111111001100111001100100010001111111",
+  "1000001001000110101010000000001000001",
+  "1011101011000110101010110101001011101",
+  "1011101010100001000011110100101011101",
+  "1011101001111011001111000010001011101",
+  "1000001001011001010110110000001000001",
+  "1111111010101010101010101010101111111",
+  "0000000001111001010101001101100000000",
+  "0001101101000011010000101100100001100",
+  "1001110000110001010101100100000111100",
+  "1010101101111010000001100100011111001",
+  "0000100000110001000000010011011001100",
+  "0011101111101111111000110000101101011",
+  "1110010001000100101100111001110010100",
+  "1110101101101001000000111101010011101",
+  "0110110101001110000101110001000101110",
+  "0110001111000110100110010100001000101",
+  "0100100011110010010110010001010101010",
+  "1100011011100001011100100101010011001",
+  "0000110010110111101000000100111101010",
+  "0111111010110110100001011011111011011",
+  "0010110100001110010111000111100111000",
+  "1010011001001001011101111101000010101",
+  "1110000010101010110110000101110101101",
+  "1000101010000001000001101100111101000",
+  "1001010011111110100101100110000010000",
+  "1111111101010011100010111011001100111",
+  "1001000101011011100000110001010001100",
+  "1011101001101110001001001100111111100",
+  "0000000011100011100100001110100011100",
+  "1111111011100100000100111000101011101",
+  "1000001001010010101010100110100011010",
+  "1011101010001110010111110001111110011",
+  "1011101011110110101011101110001001000",
+  "1011101001100101101001110010100011011",
+  "1000001001000110010010011010010101111",
+  "1111111000011000110001111000100001001",
+];
+
 /* ─── Helpers ─── */
 function DecoCircle({ color, position, size = 420, opacity = 0.08 }) {
   return (
@@ -481,6 +522,99 @@ function BDLogo({ size = 80, color = B.orange }) {
       <path
         d="M162.809 62.006C163.821 58.0261 164.355 53.8443 164.355 49.5472C164.355 22.178 142.749 0 116.086 0H48.3477H0C0 2.68212 0 155.534 0 158H147.989C174.455 158 195.92 135.966 195.92 108.799C195.92 86.9382 182.027 68.4229 162.823 62.006H162.809ZM147.792 118.691H39.7364V39.2945H115.89C121.34 39.2945 125.92 43.6926 126.046 49.2876C126.173 55.0411 121.649 59.7709 116.072 59.7709L59.5956 60.04V99.0133L147.975 98.8924C153.369 98.8924 157.738 103.464 157.612 109.03C157.485 114.437 153.06 118.691 147.792 118.691Z"
         fill={color}
+      />
+    </svg>
+  );
+}
+
+const BD_LOGO_PATH =
+  "M162.809 62.006C163.821 58.0261 164.355 53.8443 164.355 49.5472C164.355 22.178 142.749 0 116.086 0H48.3477H0C0 2.68212 0 155.534 0 158H147.989C174.455 158 195.92 135.966 195.92 108.799C195.92 86.9382 182.027 68.4229 162.823 62.006H162.809ZM147.792 118.691H39.7364V39.2945H115.89C121.34 39.2945 125.92 43.6926 126.046 49.2876C126.173 55.0411 121.649 59.7709 116.072 59.7709L59.5956 60.04V99.0133L147.975 98.8924C153.369 98.8924 157.738 103.464 157.612 109.03C157.485 114.437 153.06 118.691 147.792 118.691Z";
+
+function BrandedQR({ size = 260, matrix = QR_LINKEDIN, accent = B.orange, dark = B.bigStone }) {
+  const n = matrix.length;
+  // Generous quiet zone — required by the QR spec (typically 4 modules)
+  const quietModules = 3;
+  const cell = size / (n + quietModules * 2);
+  const pad = cell * quietModules;
+  const dotR = cell * 0.46;
+
+  const inFinder = (x, y) =>
+    (x < 7 && y < 7) || (x >= n - 7 && y < 7) || (x < 7 && y >= n - 7);
+
+  // Large translucent BD logo overlay — fills ~58% of the QR width so the B
+  // silhouette reads clearly while the underlying dots remain visible
+  // through the tint
+  const logoW = n * cell * 0.62;
+  const logoH = (logoW * 158) / 196;
+  const logoX = pad + (n * cell - logoW) / 2;
+  const logoY = pad + (n * cell - logoH) / 2;
+  const logoScale = logoW / 196;
+
+  const darkDots = [];
+  for (let y = 0; y < n; y++) {
+    for (let x = 0; x < n; x++) {
+      if (inFinder(x, y)) continue;
+      if (matrix[y][x] !== "1") continue;
+      const cx = pad + x * cell + cell / 2;
+      const cy = pad + y * cell + cell / 2;
+      darkDots.push({ cx, cy });
+    }
+  }
+
+  const finderPositions = [
+    { x: pad, y: pad },
+    { x: pad + (n - 7) * cell, y: pad },
+    { x: pad, y: pad + (n - 7) * cell },
+  ];
+
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      {/* White background */}
+      <rect width={size} height={size} fill={B.white} rx={size * 0.06} />
+
+      {/* Dark dots — every set module preserved (data is intact) */}
+      {darkDots.map((d, i) => (
+        <circle key={`d${i}`} cx={d.cx} cy={d.cy} r={dotR} fill={dark} />
+      ))}
+
+      {/* Finder patterns — sharp squares for reliable scanning */}
+      {finderPositions.map((f, i) => (
+        <g key={i}>
+          <rect
+            x={f.x}
+            y={f.y}
+            width={cell * 7}
+            height={cell * 7}
+            rx={cell * 0.25}
+            fill={dark}
+          />
+          <rect
+            x={f.x + cell}
+            y={f.y + cell}
+            width={cell * 5}
+            height={cell * 5}
+            rx={cell * 0.2}
+            fill={B.white}
+          />
+          <rect
+            x={f.x + cell * 2}
+            y={f.y + cell * 2}
+            width={cell * 3}
+            height={cell * 3}
+            rx={cell * 0.15}
+            fill={dark}
+          />
+        </g>
+      ))}
+
+      {/* Translucent BD logo overlay — orange tints the QR underneath, dots
+          remain visible through the fill. Light cells appear peach, dark
+          dots stay dark, so scanners read the data correctly. */}
+      <path
+        d={BD_LOGO_PATH}
+        fill={accent}
+        opacity={0.55}
+        transform={`translate(${logoX}, ${logoY}) scale(${logoScale})`}
       />
     </svg>
   );
@@ -1232,12 +1366,12 @@ function useAgendaCycle(active, totalItems, itemMs = 750, pauseMs = 1800) {
 }
 
 function useChatCycle(active) {
-  // Phase 0: 0-1800ms user types question
-  // Phase 1: 1800-3000ms typing dots
-  // Phase 2: 3000-7800ms AI types answer
-  // Phase 3: 7800-9800ms pause, then loop
+  // Phase 0: 0-2500ms    user types question
+  // Phase 1: 2500-4200ms typing dots
+  // Phase 2: 4200-11000ms AI types answer
+  // Phase 3: 11000-13500ms pause, then loop
   const [tick, setTick] = useState(0);
-  const cycle = 9800;
+  const cycle = 13500;
   useEffect(() => {
     if (!active) {
       setTick(0);
@@ -1402,10 +1536,10 @@ function MeetingBookChat({ slide, active, accent, circlePos }) {
   const userQ = slide.question;
   const aiA = slide.answer;
   // Reveal progress
-  const userProgress = Math.min(tick / 1800, 1);
-  const showTyping = tick >= 1800 && tick < 3000;
-  const aiStart = 3000;
-  const aiProgress = tick >= aiStart ? Math.min((tick - aiStart) / 4500, 1) : 0;
+  const userProgress = Math.min(tick / 2500, 1);
+  const showTyping = tick >= 2500 && tick < 4200;
+  const aiStart = 4200;
+  const aiProgress = tick >= aiStart ? Math.min((tick - aiStart) / 6800, 1) : 0;
   const userShown = userQ.slice(0, Math.floor(userQ.length * userProgress));
   const aiShown = aiA.slice(0, Math.floor(aiA.length * aiProgress));
 
@@ -1464,7 +1598,7 @@ function MeetingBookChat({ slide, active, accent, circlePos }) {
                 <div style={{ fontSize: 10, fontWeight: 600, color: B.gullGray, marginBottom: 4 }}>אתה</div>
                 <div style={{ padding: "10px 12px", borderRadius: "12px 12px 12px 4px", background: B.bigStone, color: B.white, fontSize: 12, fontWeight: 400, lineHeight: 1.5 }}>
                   {userShown}
-                  {tick < 1800 && active && <span style={{ display: "inline-block", width: 1, height: 11, background: B.white, marginInlineStart: 2, animation: "blinkCaret 0.9s steps(2) infinite", verticalAlign: "middle" }} />}
+                  {tick < 2500 && active && <span style={{ display: "inline-block", width: 1, height: 11, background: B.white, marginInlineStart: 2, animation: "blinkCaret 0.9s steps(2) infinite", verticalAlign: "middle" }} />}
                 </div>
               </div>
               {/* Typing indicator */}
@@ -2277,32 +2411,89 @@ function CTAEnd({ slide, active, accent, circlePos }) {
     <SlideWrap active={active}>
       <DecoCircle color={accent} position={circlePos} />
       <DecoCircle color={B.orange} position={{ bottom: "-200px", left: "-200px", right: "auto", top: "auto" }} size={420} opacity={0.07} />
-      <div style={{ zIndex: 2, textAlign: "center", maxWidth: 860, width: "100%" }}>
-        <div style={{ marginBottom: 26 }}><BDLogo size={66} /></div>
-        <div style={{ fontSize: "clamp(56px, 10vw, 110px)", fontWeight: 900, lineHeight: 1, marginBottom: 16, background: `linear-gradient(135deg, ${B.orange} 0%, ${B.royalBlue} 100%)`, backgroundSize: "200% auto", animation: active ? "shimmer 5s linear infinite" : "none", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(30px)", transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 250ms" }}>
-          {slide.headline}
-        </div>
-        <div style={{ fontSize: "clamp(15px, 2vw, 19px)", fontWeight: 400, color: B.gullGray, marginBottom: 38, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 550ms" }}>
-          {slide.subtitle}
-        </div>
-        <div style={{ padding: "20px 32px", borderRadius: 16, background: `linear-gradient(135deg, ${B.orange}, ${B.royalBlue})`, color: B.white, fontSize: "clamp(16px, 2.2vw, 20px)", fontWeight: 600, display: "inline-block", boxShadow: `0 14px 40px ${B.orange}40`, marginBottom: 14, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(20px)", transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 750ms" }}>
-          {slide.cta}
-        </div>
-        <div style={{ fontSize: "clamp(13px, 1.6vw, 16px)", fontWeight: 400, color: B.cadetBlue, marginBottom: 36, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 900ms" }}>
-          {slide.cta2}
-        </div>
-        <div style={{ display: "flex", justifyContent: "center", gap: 24, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1050ms", fontFamily: `'${B.fontEn}', sans-serif` }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: B.bigStone, fontWeight: 500 }}>
-            <FlatIcon name="mail" size={16} color={B.orange} />
-            {slide.contact.email}
+      <div style={{ zIndex: 2, width: "100%", maxWidth: 1180, display: "flex", alignItems: "center", gap: "clamp(24px, 5vw, 72px)" }}>
+        {/* Right column (RTL): text content */}
+        <div style={{ flex: 1, textAlign: "center" }}>
+          <div style={{ marginBottom: 22 }}>
+            <img
+              src={A("/bd-logo-full.svg")}
+              alt="Boardirector"
+              style={{ height: 110, width: "auto", display: "inline-block" }}
+            />
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: B.bigStone, fontWeight: 500 }}>
-            <FlatIcon name="globe" size={16} color={B.royalBlue} />
-            {slide.contact.site}
+          <div style={{ fontSize: "clamp(48px, 8vw, 92px)", fontWeight: 900, lineHeight: 1, marginBottom: 14, background: `linear-gradient(135deg, ${B.orange} 0%, ${B.royalBlue} 100%)`, backgroundSize: "200% auto", animation: active ? "shimmer 5s linear infinite" : "none", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(30px)", transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 250ms" }}>
+            {slide.headline}
+          </div>
+          <div style={{ fontSize: "clamp(14px, 1.8vw, 18px)", fontWeight: 400, color: B.gullGray, marginBottom: 28, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 550ms" }}>
+            {slide.subtitle}
+          </div>
+          <div style={{ padding: "16px 28px", borderRadius: 14, background: `linear-gradient(135deg, ${B.orange}, ${B.royalBlue})`, color: B.white, fontSize: "clamp(15px, 2vw, 18px)", fontWeight: 600, display: "inline-block", boxShadow: `0 14px 40px ${B.orange}40`, marginBottom: 12, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(20px)", transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 750ms" }}>
+            {slide.cta}
+          </div>
+          <div style={{ fontSize: "clamp(12px, 1.5vw, 15px)", fontWeight: 400, color: B.cadetBlue, marginBottom: 28, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 900ms" }}>
+            {slide.cta2}
+          </div>
+          <div style={{ display: "flex", justifyContent: "center", gap: 22, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1050ms", fontFamily: `'${B.fontEn}', sans-serif` }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: B.bigStone, fontWeight: 500 }}>
+              <FlatIcon name="mail" size={15} color={B.orange} />
+              {slide.contact.email}
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: B.bigStone, fontWeight: 500 }}>
+              <FlatIcon name="globe" size={15} color={B.royalBlue} />
+              {slide.contact.site}
+            </div>
+          </div>
+          <div style={{ marginTop: 24, fontSize: 12, color: B.gullGray, opacity: active ? 1 : 0, transition: "all 0.7s ease 1200ms" }}>
+            {slide.speaker}
           </div>
         </div>
-        <div style={{ marginTop: 30, fontSize: 13, color: B.gullGray, opacity: active ? 1 : 0, transition: "all 0.7s ease 1200ms" }}>
-          {slide.speaker}
+
+        {/* Left column: branded QR */}
+        <div
+          style={{
+            flex: "0 0 auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 14,
+            opacity: active ? 1 : 0,
+            transform: active ? "translateY(0) scale(1)" : "translateY(20px) scale(0.95)",
+            transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 650ms",
+          }}
+        >
+          <div
+            style={{
+              padding: 14,
+              borderRadius: 22,
+              background: B.white,
+              border: `1px solid ${B.athensGray}`,
+              boxShadow: "0 18px 50px rgba(23,33,52,0.18), 0 4px 14px rgba(23,33,52,0.06)",
+            }}
+          >
+            <BrandedQR size={240} />
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <div
+              style={{
+                fontSize: 13,
+                fontWeight: 700,
+                color: B.bigStone,
+                marginBottom: 3,
+              }}
+            >
+              סרקו להתחבר
+            </div>
+            <div
+              style={{
+                fontSize: 11,
+                color: B.gullGray,
+                fontFamily: `'${B.fontEn}', sans-serif`,
+                letterSpacing: 1,
+              }}
+            >
+              Neil Dahan · LinkedIn
+            </div>
+          </div>
         </div>
       </div>
     </SlideWrap>
