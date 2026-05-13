@@ -340,17 +340,43 @@ const SLIDES = [
     ],
     footer: "במקום לחפש ולכתוב — אתם מאשרים. AI שעובד לצידכם, לא במקומכם.",
   },
-  // 14. FIELD RESULTS
+  // 14. FIELD RESULTS — old world vs. new world (animated)
   {
     id: "field",
     type: "field-results",
-    title: "מה קורה בשטח",
-    subtitle: "ארגונים שעבדו איתנו, עם עשרות ועדות פעילות",
-    results: [
-      { before: "שעות הכנה לישיבה", after: "דקות", color: "royalBlue" },
-      { before: "ימים לאיתור החלטה ישנה", after: "שניות", color: "orange" },
-      { before: "רדיפה אחרי חתימות", after: "תהליך אישור דיגיטלי חכם", color: "teal" },
-    ],
+    title: "מהעולם הישן — לעולם החדש",
+    subtitle: "אותה עבודה — שבר מהזמן",
+    oldWorld: {
+      label: "פעם",
+      caption: "ימים, שבועות, ושעות שאף אחד לא יחזיר",
+      cards: [
+        { icon: "document", title: "בניית סדר יום", note: "ימים של עבודה ידנית", style: "sticky" },
+        { icon: "search", title: "איתור החלטה ישנה", note: "ימים של חיפוש", style: "search" },
+        { icon: "pencil", title: "החתמת פרוטוקול", note: "שבועות · רדיפה ידנית", style: "doc" },
+        { icon: "folder", title: "הכנה לביקורת", note: "ימים של איסוף ידני", style: "folder" },
+        { icon: "envelope", title: "שיתוף חומרים", note: "מיילים · גרסאות · בלגן", style: "email" },
+        { icon: "chart", title: "מעקב משימות", note: "נופלות בין הכיסאות", style: "sheet" },
+      ],
+      drifters: [
+        { text: "החלטה?", color: "red" },
+        { text: "ימים אבודים", color: "orange" },
+        { text: "?לא תועד", color: "red" },
+        { text: "מי אחראי?", color: "red" },
+        { text: "שעות חיפוש", color: "orange" },
+      ],
+    },
+    newWorld: {
+      label: "היום",
+      caption: "אותה עבודה — בשבר מהזמן",
+      transformations: [
+        { label: "בניית סדר יום", oldValue: "ימים", newValue: "דקות" },
+        { label: "איתור החלטה", oldValue: "ימים", newValue: "שניות" },
+        { label: "אישור פרוטוקול", oldValue: "שבועות · ידני", newValue: "תהליך חכם" },
+        { label: "הכנה לביקורת", oldValue: "ימים", newValue: "בלחיצה" },
+        { label: "מעקב החלטות", oldValue: "מפוזר", newValue: "מאורגן ונגיש" },
+        { label: "שליחת חומרים", oldValue: "ידני", newValue: "מאובטח" },
+      ],
+    },
   },
   // 15. WHY NOW
   {
@@ -1017,6 +1043,10 @@ export default function PresentationNimbus() {
         @keyframes blinkCaret { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
         @keyframes typingDot { 0%, 80%, 100% { transform: translateY(0) scale(0.85); opacity: 0.4; } 40% { transform: translateY(-3px) scale(1.1); opacity: 1; } }
         @keyframes popIn { 0% { transform: scale(0.6); opacity: 0; } 60% { transform: scale(1.06); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes cardSway { 0%, 100% { transform: rotate(var(--rot, 0deg)) translateY(0); } 50% { transform: rotate(calc(var(--rot, 0deg) + 1.4deg)) translateY(-2px); } }
+        @keyframes leakOut { 0% { transform: translate(0, 0) rotate(0deg) scale(0.6); opacity: 0; } 20% { opacity: 1; } 100% { transform: translate(var(--lx, -60px), var(--ly, 40px)) rotate(var(--lr, -25deg)) scale(0.9); opacity: 0; } }
+        @keyframes driftAcross { 0% { transform: translateX(0) translateY(0); opacity: 0; } 15% { opacity: 0.95; } 80% { opacity: 0.95; } 100% { transform: translateX(var(--dx, 220px)) translateY(var(--dy, -30px)); opacity: 0; } }
+        @keyframes questionBob { 0%, 100% { transform: translateY(0) rotate(-3deg); opacity: 0.55; } 50% { transform: translateY(-10px) rotate(3deg); opacity: 1; } }
 
         /* Animated conic-gradient angle (no element rotation) */
         @property --ai-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
@@ -2249,92 +2279,548 @@ function AICapabilities({ slide, active, accent, circlePos }) {
 
 /* ─── 11. FIELD RESULTS ─── */
 function FieldResults({ slide, active, accent, circlePos }) {
+  const old = slide.oldWorld;
+  const fresh = slide.newWorld;
   return (
     <SlideWrap active={active}>
       <DecoCircle color={accent} position={circlePos} />
-      <div style={{ zIndex: 2, maxWidth: 980, width: "100%" }}>
-        <div style={{ fontSize: "clamp(28px, 4.5vw, 44px)", fontWeight: 800, color: B.bigStone, textAlign: "center", marginBottom: 12, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(20px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 200ms" }}>
-          {slide.title}
+      <div style={{ zIndex: 2, maxWidth: 1320, width: "100%" }}>
+        {/* Title */}
+        <div style={{ textAlign: "center", marginBottom: 22 }}>
+          <div
+            style={{
+              fontSize: "clamp(24px, 3.6vw, 38px)",
+              fontWeight: 800,
+              color: B.bigStone,
+              marginBottom: 8,
+              opacity: active ? 1 : 0,
+              transform: active ? "translateY(0)" : "translateY(20px)",
+              transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 200ms",
+            }}
+          >
+            {slide.title}
+          </div>
+          <div
+            style={{
+              fontSize: "clamp(13px, 1.6vw, 16px)",
+              fontWeight: 300,
+              color: B.gullGray,
+              opacity: active ? 1 : 0,
+              transform: active ? "translateY(0)" : "translateY(15px)",
+              transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 350ms",
+            }}
+          >
+            {slide.subtitle}
+          </div>
         </div>
-        <div style={{ fontSize: "clamp(14px, 1.8vw, 18px)", fontWeight: 300, color: B.gullGray, textAlign: "center", marginBottom: 38, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 350ms" }}>
-          {slide.subtitle}
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          {slide.results.map((r, i) => {
-            const c = tone(r.color);
-            return (
-              <div
-                key={i}
-                style={{
-                  display: "flex",
-                  alignItems: "stretch",
-                  gap: 18,
-                  opacity: active ? 1 : 0,
-                  transform: active ? "translateX(0)" : "translateX(30px)",
-                  transition: `all 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${500 + i * 200}ms`,
-                }}
-              >
-                {/* BEFORE — light pink, right side in RTL */}
-                <div
-                  style={{
-                    flex: 1,
-                    padding: "22px 28px",
-                    borderRadius: 14,
-                    background: "#FCEFEF",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 8,
-                    minHeight: 78,
-                  }}
-                >
-                  <span style={{ fontSize: "clamp(13px, 1.5vw, 15px)", fontWeight: 700, color: B.red }}>
-                    לפני:
-                  </span>
-                  <span style={{ fontSize: "clamp(14px, 1.7vw, 18px)", fontWeight: 500, color: B.bigStone }}>
-                    {r.before}
-                  </span>
-                </div>
-                {/* Arrow — accent-colored, points toward AFTER */}
-                <div
-                  style={{
-                    alignSelf: "center",
-                    fontSize: "clamp(26px, 3.4vw, 36px)",
-                    fontWeight: 800,
-                    color: c,
-                    fontFamily: `'${B.fontEn}', sans-serif`,
-                    lineHeight: 1,
-                  }}
-                >
-                  {">"}
-                </div>
-                {/* AFTER — light green, left side in RTL */}
-                <div
-                  style={{
-                    flex: 1,
-                    padding: "22px 28px",
-                    borderRadius: 14,
-                    background: "#EAF8EF",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 10,
-                    minHeight: 78,
-                  }}
-                >
-                  <span style={{ fontSize: "clamp(13px, 1.5vw, 15px)", fontWeight: 700, color: B.green }}>
-                    אחרי:
-                  </span>
-                  <span style={{ fontSize: "clamp(20px, 2.8vw, 30px)", fontWeight: 800, color: B.bigStone }}>
-                    {r.after}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
+
+        {/* Two panels with center divider */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "stretch",
+            gap: 0,
+            height: "min(62vh, 540px)",
+          }}
+        >
+          {/* RIGHT panel — old world (RTL: read first) */}
+          <OldWorldPanel data={old} active={active} />
+
+          {/* Center divider with B badge */}
+          <CenterDivider active={active} />
+
+          {/* LEFT panel — new world */}
+          <NewWorldPanel data={fresh} active={active} />
         </div>
       </div>
     </SlideWrap>
+  );
+}
+
+const OLD_CARD_POS = [
+  { top: "8%", right: "6%", rotate: -5 },
+  { top: "10%", left: "8%", rotate: 4 },
+  { top: "40%", right: "3%", rotate: 3 },
+  { top: "44%", left: "4%", rotate: -3 },
+  { bottom: "8%", right: "16%", rotate: -2 },
+  { bottom: "10%", left: "20%", rotate: 5 },
+];
+
+function OldWorldPanel({ data, active }) {
+  return (
+    <div
+      style={{
+        flex: 1,
+        position: "relative",
+        background: "linear-gradient(160deg, #232E47 0%, #1B2335 100%)",
+        borderRadius: 18,
+        padding: "26px 22px",
+        overflow: "hidden",
+        boxShadow: "0 18px 50px rgba(23,33,52,0.18)",
+        opacity: active ? 1 : 0,
+        transform: active ? "translateY(0)" : "translateY(20px)",
+        transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 450ms",
+      }}
+    >
+      {/* Cork-board texture dots */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)`,
+          backgroundSize: "14px 14px",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Header */}
+      <div style={{ position: "relative", textAlign: "center", marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.55)" }}>
+          {data.caption}
+        </div>
+      </div>
+
+      {/* Scattered cards + chaos overlays */}
+      <div style={{ position: "relative", height: "calc(100% - 60px)" }}>
+        {data.cards.map((c, i) => {
+          const pos = OLD_CARD_POS[i] || {};
+          // Stagger the sway so all cards aren't moving in sync
+          return (
+            <OldCard
+              key={i}
+              card={c}
+              pos={pos}
+              delay={650 + i * 110}
+              active={active}
+              swayDur={4 + (i % 3) * 0.6}
+              swayDelay={(i % 4) * 0.4}
+            />
+          );
+        })}
+
+        {/* Drifting decision / question bubbles */}
+        {active &&
+          data.drifters?.map((d, i) => {
+            const palette = {
+              red: { bg: "rgba(229,72,72,0.18)", border: "rgba(229,72,72,0.45)", text: "#FFD2D2" },
+              orange: { bg: "rgba(254,117,1,0.16)", border: "rgba(254,117,1,0.4)", text: "#FFD8B0" },
+            };
+            const p = palette[d.color] || palette.red;
+            const tops = ["18%", "55%", "30%", "70%", "42%"];
+            const lefts = ["22%", "10%", "60%", "50%", "30%"];
+            const dxs = ["-180px", "200px", "-160px", "220px", "-140px"];
+            const dys = ["-40px", "-55px", "30px", "-30px", "40px"];
+            const dur = 6.5 + (i % 3) * 1.4;
+            const delay = 2 + i * 1.8;
+            return (
+              <div
+                key={`drift-${i}`}
+                style={{
+                  position: "absolute",
+                  top: tops[i % tops.length],
+                  left: lefts[i % lefts.length],
+                  padding: "5px 11px",
+                  borderRadius: 999,
+                  background: p.bg,
+                  border: `1px solid ${p.border}`,
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: p.text,
+                  whiteSpace: "nowrap",
+                  pointerEvents: "none",
+                  ["--dx"]: dxs[i % dxs.length],
+                  ["--dy"]: dys[i % dys.length],
+                  animation: `driftAcross ${dur}s linear ${delay}s infinite`,
+                  opacity: 0,
+                }}
+              >
+                {d.text}
+              </div>
+            );
+          })}
+
+        {/* Floating "time wasted" pings — clock + hours */}
+        {active && (
+          <>
+            {[
+              { top: "12%", left: "30%", text: "שעות", delay: "0.4s" },
+              { top: "50%", left: "12%", text: "ימים", delay: "2.1s" },
+              { top: "62%", left: "62%", text: "שבועות", delay: "3.6s" },
+            ].map((p, i) => (
+              <div
+                key={`tw-${i}`}
+                style={{
+                  position: "absolute",
+                  top: p.top,
+                  left: p.left,
+                  padding: "4px 10px 4px 8px",
+                  borderRadius: 999,
+                  background: "rgba(255,255,255,0.95)",
+                  boxShadow: "0 6px 16px rgba(0,0,0,0.35)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 5,
+                  fontSize: 11,
+                  fontWeight: 800,
+                  color: B.red,
+                  fontFamily: `'${B.fontEn}', sans-serif`,
+                  letterSpacing: 0.4,
+                  pointerEvents: "none",
+                  ["--dx"]: `${-90 - (i % 2) * 30}px`,
+                  ["--dy"]: `${-30 - (i % 3) * 15}px`,
+                  animation: `driftAcross ${7 + i * 0.8}s linear ${p.delay} infinite`,
+                  opacity: 0,
+                }}
+              >
+                <span style={{ fontSize: 12 }}>⏱</span>
+                {p.text}
+              </div>
+            ))}
+          </>
+        )}
+
+        {/* Floating question marks */}
+        {active && (
+          <>
+            {[
+              { top: "12%", left: "44%", delay: "1.5s" },
+              { top: "60%", left: "70%", delay: "3.0s" },
+              { top: "28%", left: "80%", delay: "0.8s" },
+            ].map((q, i) => (
+              <div
+                key={`q-${i}`}
+                style={{
+                  position: "absolute",
+                  top: q.top,
+                  left: q.left,
+                  fontSize: 26,
+                  fontWeight: 900,
+                  color: B.red,
+                  textShadow: "0 2px 8px rgba(229,72,72,0.5)",
+                  fontFamily: `'${B.fontEn}', sans-serif`,
+                  pointerEvents: "none",
+                  animation: `questionBob 3.8s ease-in-out ${q.delay} infinite`,
+                  opacity: 0,
+                }}
+              >
+                ?
+              </div>
+            ))}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function OldCard({ card, pos, delay, active, swayDur = 5, swayDelay = 0 }) {
+  const style = card.style;
+  const rot = pos.rotate || 0;
+
+  // Per-style visual treatment
+  const styleByKind = {
+    doc: {
+      background: B.white,
+      border: `1px solid ${B.athensGray}`,
+      icon: B.royalBlue,
+    },
+    email: {
+      background: "#FFF9EE",
+      border: "1px solid #F0E2BE",
+      icon: B.orange,
+    },
+    sheet: {
+      background: "#E9F6EC",
+      border: "1px solid #C9E2CF",
+      icon: "#21884B",
+    },
+    folder: {
+      background: "#F1ECFB",
+      border: "1px solid #DACFF0",
+      icon: "#7C5CCF",
+    },
+    sticky: {
+      background: "#FFF3A8",
+      border: "1px solid #E9DC78",
+      icon: "#9C7400",
+    },
+    search: {
+      background: B.white,
+      border: `1px dashed ${B.red}`,
+      icon: B.red,
+    },
+  };
+  const s = styleByKind[style] || styleByKind.doc;
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: pos.top,
+        bottom: pos.bottom,
+        left: pos.left,
+        right: pos.right,
+        opacity: active ? 1 : 0,
+        transform: active ? "translateY(0) scale(1)" : "translateY(12px) scale(0.92)",
+        transition: `all 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+      }}
+    >
+      <div
+        style={{
+          background: s.background,
+          border: s.border,
+          borderRadius: 8,
+          padding: "10px 12px",
+          minWidth: 180,
+          maxWidth: 230,
+          boxShadow: "0 10px 22px rgba(0,0,0,0.28), 0 2px 6px rgba(0,0,0,0.18)",
+          display: "flex",
+          flexDirection: "column",
+          gap: 4,
+          ["--rot"]: `${rot}deg`,
+          transform: `rotate(${rot}deg)`,
+          animation: active ? `cardSway ${swayDur}s ease-in-out infinite` : "none",
+          animationDelay: active ? `${delay + 700 + swayDelay * 1000}ms` : undefined,
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <div
+            style={{
+              width: 22,
+              height: 22,
+              borderRadius: 6,
+              background: `${s.icon}15`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <FlatIcon name={card.icon} size={13} color={s.icon} />
+          </div>
+          <div style={{ fontSize: 12, fontWeight: 700, color: B.bigStone, lineHeight: 1.2 }}>
+            {card.title}
+          </div>
+        </div>
+        {card.note && (
+          <div style={{ fontSize: 10, color: B.gullGray, fontWeight: 400, lineHeight: 1.3 }}>
+            {card.note}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function NewWorldPanel({ data, active }) {
+  return (
+    <div
+      style={{
+        flex: 1,
+        position: "relative",
+        background: `linear-gradient(160deg, ${B.white} 0%, ${B.whisper} 100%)`,
+        borderRadius: 18,
+        padding: "26px 22px",
+        overflow: "hidden",
+        border: `1px solid ${B.athensGray}`,
+        boxShadow: "0 18px 50px rgba(23,33,52,0.10)",
+        opacity: active ? 1 : 0,
+        transform: active ? "translateY(0)" : "translateY(20px)",
+        transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 650ms",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      {/* Header */}
+      <div style={{ textAlign: "center", marginBottom: 14 }}>
+        <div style={{ fontSize: 13, fontWeight: 500, color: B.gullGray }}>
+          {data.caption}
+        </div>
+      </div>
+
+      {/* Transformations */}
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          gap: 8,
+          overflow: "hidden",
+        }}
+      >
+        {data.transformations.map((t, i) => (
+          <TransformationRow key={i} item={t} index={i} active={active} />
+        ))}
+      </div>
+
+    </div>
+  );
+}
+
+function TransformationRow({ item, index, active }) {
+  const delay = 700 + index * 160;
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+        padding: "10px 14px",
+        borderRadius: 10,
+        background: B.white,
+        border: `1px solid ${B.athensGray}`,
+        boxShadow: "0 2px 8px rgba(23,33,52,0.04)",
+        opacity: active ? 1 : 0,
+        transform: active ? "translateX(0)" : "translateX(20px)",
+        transition: `all 0.65s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+      }}
+    >
+      {/* Label */}
+      <div
+        style={{
+          flex: "0 0 30%",
+          fontSize: 12.5,
+          fontWeight: 600,
+          color: B.bigStone,
+          lineHeight: 1.25,
+        }}
+      >
+        {item.label}
+      </div>
+
+      {/* Old value — struck through */}
+      <div
+        style={{
+          flex: 1,
+          fontSize: 12,
+          color: B.gullGray,
+          textDecoration: "line-through",
+          textDecorationColor: `${B.red}80`,
+          textAlign: "center",
+          opacity: 0.85,
+          fontWeight: 500,
+        }}
+      >
+        {item.oldValue}
+      </div>
+
+      {/* Arrow */}
+      <div
+        style={{
+          color: B.cadetBlue,
+          fontSize: 14,
+          fontFamily: `'${B.fontEn}', sans-serif`,
+          fontWeight: 700,
+          opacity: active ? 1 : 0,
+          transition: `opacity 0.4s ease ${delay + 200}ms`,
+        }}
+      >
+        ←
+      </div>
+
+      {/* New value — big gradient */}
+      <div
+        style={{
+          flex: 1,
+          textAlign: "center",
+          fontSize: 18,
+          fontWeight: 800,
+          background: `linear-gradient(135deg, ${B.orange}, ${B.royalBlue})`,
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+          lineHeight: 1.1,
+          opacity: active ? 1 : 0,
+          transform: active ? "scale(1)" : "scale(0.85)",
+          transition: `all 0.55s cubic-bezier(0.16, 1, 0.3, 1) ${delay + 280}ms`,
+        }}
+      >
+        {item.newValue}
+      </div>
+
+      {/* Green check */}
+      <span
+        style={{
+          width: 22,
+          height: 22,
+          borderRadius: "50%",
+          background: B.green,
+          color: B.white,
+          fontSize: 12,
+          fontWeight: 800,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexShrink: 0,
+          opacity: active ? 1 : 0,
+          transform: active ? "scale(1)" : "scale(0.5)",
+          transition: `all 0.45s cubic-bezier(0.16, 1, 0.3, 1) ${delay + 380}ms`,
+        }}
+      >
+        ✓
+      </span>
+    </div>
+  );
+}
+
+function CenterDivider({ active }) {
+  return (
+    <div
+      style={{
+        width: 84,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 10,
+        position: "relative",
+        padding: "0 6px",
+      }}
+    >
+      <div
+        style={{
+          width: 2,
+          flex: 1,
+          background: `linear-gradient(180deg, transparent, ${B.athensGray}, transparent)`,
+        }}
+      />
+      <div
+        style={{
+          width: 62,
+          height: 62,
+          borderRadius: "50%",
+          background: `linear-gradient(135deg, ${B.orange}, ${B.royalBlue})`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxShadow: `0 14px 32px ${B.orange}55, 0 6px 14px ${B.royalBlue}33`,
+          transform: active ? "scale(1)" : "scale(0.6)",
+          opacity: active ? 1 : 0,
+          transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1000ms",
+        }}
+      >
+        <BDLogo size={30} color={B.white} />
+      </div>
+      <div
+        style={{
+          fontSize: 22,
+          color: B.cadetBlue,
+          lineHeight: 1,
+          opacity: active ? 1 : 0,
+          transform: active ? "translateX(0)" : "translateX(10px)",
+          transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1300ms",
+        }}
+      >
+        ←
+      </div>
+      <div
+        style={{
+          width: 2,
+          flex: 1,
+          background: `linear-gradient(180deg, transparent, ${B.athensGray}, transparent)`,
+        }}
+      />
+    </div>
   );
 }
 
@@ -3054,6 +3540,24 @@ function CreateMeeting({ slide, active, accent, circlePos }) {
   const pulse = tick >= 32500 && tick < 34500;
   const done = tick >= 34500;
 
+  // Auto-scroll the modal body so the active region of the animation stays
+  // in view, even when the host viewport is too short (e.g. 125% zoom).
+  const bodyRef = useRef(null);
+  const prevStepRef = useRef(step);
+  useEffect(() => {
+    const el = bodyRef.current;
+    if (!el) return;
+    const id = requestAnimationFrame(() => {
+      if (step !== prevStepRef.current) {
+        el.scrollTo({ top: 0, behavior: "smooth" });
+        prevStepRef.current = step;
+      } else if (step !== 1) {
+        el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+      }
+    });
+    return () => cancelAnimationFrame(id);
+  }, [step, visibleAttendees, msgShown.length]);
+
   return (
     <FlowFrame slide={slide} active={active} accent={accent} circlePos={circlePos}>
       <div
@@ -3069,8 +3573,8 @@ function CreateMeeting({ slide, active, accent, circlePos }) {
         dir="rtl"
         style={{
           position: "absolute",
-          top: "4%",
-          bottom: "4%",
+          top: "3%",
+          bottom: "3%",
           left: "50%",
           transform: active && modalIn ? "translateX(-50%) scale(1)" : "translateX(-50%) scale(0.93)",
           opacity: active && modalIn ? 1 : 0,
@@ -3136,7 +3640,7 @@ function CreateMeeting({ slide, active, accent, circlePos }) {
           </div>
 
           {/* Body */}
-          <div style={{ flex: 1, padding: "12px 18px", overflow: "hidden" }}>
+          <div ref={bodyRef} style={{ flex: 1, padding: "12px 18px", overflow: "auto", scrollBehavior: "smooth" }}>
             {step === 1 && <CMStep1 s1={s1} sNameShown={sNameShown} sNameTyping={sName > 0 && sName < 1} sCommittee={sCommittee} sOrganizer={sOrganizer} sDate={sDate} sTime={sTime} sLocation={sLocation} sDescShown={sDescShown} sDescTyping={sDesc > 0 && sDesc < 1} />}
             {step === 2 && <CMStep2 step2={slide.step2} visibleAttendees={visibleAttendees} />}
             {step === 3 && <CMStep3 s3={s3} s3Publish={s3Publish} s3Send={s3Send} msgShown={msgShown} msgTyping={msgProg > 0 && msgProg < 1} />}
