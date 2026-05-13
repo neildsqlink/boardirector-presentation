@@ -222,9 +222,9 @@ const SLIDES = [
     aiTag: "ספר ישיבה דיגיטלי נשלח לכל משתתף",
     materials: [
       { icon: "calendar", label: "סדר יום מלא" },
-      { icon: "document", label: "פרוטוקולים מקושרים" },
-      { icon: "target", label: "החלטות לפתיחה" },
-      { icon: "folder", label: "מסמכי רקע" },
+      { icon: "folder", label: "חומרי רקע" },
+      { icon: "document", label: "פרוטוקול" },
+      { icon: "target", label: "מסמך החלטות" },
     ],
     attendees: [
       { name: "דנה לוי", initials: "ד.ל", bg: "#5877E6" },
@@ -3496,49 +3496,46 @@ function ChipPerson({ bg, initials, name }) {
 
 /* ─── 9. CREATE MEETING (3-step wizard) ─── */
 function CreateMeeting({ slide, active, accent, circlePos }) {
-  const tick = useCycle(active, 40500);
+  const tick = useCycle(active, 53000);
 
-  // Phase plan (slower)
-  // 0..3500       page visible
-  // 3500..5200    modal slides in
-  // 5200..14000   STEP 1 — field auto-fill
-  // 14000..15000  advance to step 2
-  // 15000..22000  STEP 2 — attendees populate
-  // 22000..23200  advance to step 3
-  // 23200..32000  STEP 3 — summary, checkboxes confirmed, message types
-  // 32500..34500  Create pulses
-  // 34500..38500  Created state
-  // 38500..40500  pause / loop
+  // Phase plan (slower — ~30% longer than before)
+  // 0..4500       page visible / modal slides in
+  // 6800..18200   STEP 1 — field auto-fill
+  // 19500..26300  STEP 2 — attendees populate
+  // 30000..41400  STEP 3 — summary, checkboxes confirmed, message types
+  // 42200..44800  Create pulses
+  // 44800..51000  Created state
+  // 51000..53000  pause / loop
 
-  const modalIn = tick >= 3500;
-  const step = tick < 15000 ? 1 : tick < 23200 ? 2 : 3;
+  const modalIn = tick >= 4500;
+  const step = tick < 19500 ? 1 : tick < 30000 ? 2 : 3;
 
   // Step 1 fills
   const s1 = slide.step1;
-  const sName = _clamp01((tick - 5200) / 2300);
+  const sName = _clamp01((tick - 6800) / 2900);
   const sNameShown = s1.name.slice(0, Math.floor(s1.name.length * sName));
-  const sCommittee = tick >= 7700;
-  const sOrganizer = tick >= 8500;
-  const sDate = tick >= 9200;
-  const sTime = tick >= 10000;
-  const sLocation = tick >= 11000;
-  const sDesc = _clamp01((tick - 11700) / 2300);
+  const sCommittee = tick >= 10000;
+  const sOrganizer = tick >= 11000;
+  const sDate = tick >= 12000;
+  const sTime = tick >= 13000;
+  const sLocation = tick >= 14300;
+  const sDesc = _clamp01((tick - 15200) / 3000);
   const sDescShown = s1.description.slice(0, Math.floor(s1.description.length * sDesc));
 
   // Step 2 fills attendees
-  const attStart = 15300;
-  const attInterval = 600;
+  const attStart = 19900;
+  const attInterval = 780;
   const visibleAttendees =
     tick < attStart ? 0 : Math.min(slide.step2.attendees.length, Math.floor((tick - attStart) / attInterval) + 1);
 
   // Step 3 fills
   const s3 = slide.step3;
-  const s3Publish = tick >= 24200;
-  const s3Send = tick >= 25000;
-  const msgProg = _clamp01((tick - 26200) / 5700);
+  const s3Publish = tick >= 31500;
+  const s3Send = tick >= 32500;
+  const msgProg = _clamp01((tick - 34000) / 7400);
   const msgShown = s3.message.slice(0, Math.floor(s3.message.length * msgProg));
-  const pulse = tick >= 32500 && tick < 34500;
-  const done = tick >= 34500;
+  const pulse = tick >= 42200 && tick < 44800;
+  const done = tick >= 44800;
 
   // Auto-scroll the modal body so the active region of the animation stays
   // in view, even when the host viewport is too short (e.g. 125% zoom).
@@ -3649,7 +3646,7 @@ function CreateMeeting({ slide, active, accent, circlePos }) {
           {/* Footer */}
           <div style={{ padding: "10px 18px", borderTop: `1px solid ${B.athensGray}`, display: "flex", alignItems: "center", justifyContent: "space-between", background: "#FBFCFE" }}>
             <div style={{ height: 23, padding: "0 14px", borderRadius: 10, border: `1px solid ${B.orange}40`, color: B.orange, fontSize: 11.5, fontWeight: 600, display: "inline-flex", alignItems: "center", lineHeight: 1, boxSizing: "border-box" }}>
-              {step === 1 ? slide.cancelLabel : `← ${slide.backLabel}`}
+              {step === 1 ? slide.cancelLabel : `${slide.backLabel} →`}
             </div>
             {step < 3 ? (
               <div style={{ height: 23, padding: "0 16px", borderRadius: 10, background: B.orange, color: B.white, fontSize: 11.5, fontWeight: 700, display: "inline-flex", alignItems: "center", gap: 6, lineHeight: 1, boxSizing: "border-box" }}>
