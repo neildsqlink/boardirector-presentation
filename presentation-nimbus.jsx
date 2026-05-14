@@ -58,7 +58,7 @@ const SLIDES = [
       { num: "30+", label: "ועדות קבועות", sub: "בארגון ממוצע", color: "royalBlue" },
       { num: "12+", label: "ישיבות בשנה", sub: "לכל ועדה", color: "teal" },
       { num: "100+", label: "ישיבות בשנה", sub: "בגוף ציבורי", color: "orange" },
-      { num: "1000+", label: "החלטות ומשימות", sub: "בלי מקום אחד", color: "red" },
+      { num: "1000+", label: "החלטות ומשימות", sub: "שלא מרוכזות במקום אחד", color: "red" },
     ],
     footer: "ואין מקום אחד שאפשר להיכנס אליו ולראות תמונה מלאה.",
   },
@@ -156,8 +156,8 @@ const SLIDES = [
     createdLabel: "נוצרה",
     steps: ["פרטים", "משתתפים", "סיכום ושליחה"],
     step1: {
-      name: "ישיבת דירקטוריון — Q2 2026",
-      committee: "דירקטוריון",
+      name: "ישיבת ועדת מכרזים — Q3 2026",
+      committee: "ועדת מכרזים",
       organizer: "ניל דהאן",
       dateFrom: "20/05/2026",
       dateTo: "20/05/2026",
@@ -167,7 +167,7 @@ const SLIDES = [
       remote: "Zoom",
       timezone: "(UTC+02:00) Jerusalem",
       repetition: "Does Not Repeat",
-      description: "סקירה רבעונית של תוצאות, אישור תקציב Q2, דיון ברגולציה.",
+      description: "סקירת מכרזים פתוחים, הערכת הצעות ספקים, ואישור המלצות הוועדה.",
     },
     step2: {
       attendees: [
@@ -182,14 +182,14 @@ const SLIDES = [
       ],
     },
     step3: {
-      summary: "ישיבת דירקטוריון — Q2 2026",
+      summary: "ישיבת ועדת מכרזים — Q3 2026",
       date: "20/05/2026",
       time: "09:00 – 15:00",
       location: "אגף ראשי · 2 ז'בוטינסקי, רמת גן",
       publish: true,
       sendInvite: true,
-      messageTitle: "הזמנה לישיבת דירקטוריון Q2 2026",
-      message: "שלום,\nאתם מוזמנים לישיבת דירקטוריון Q2 2026 בתאריך 20/05/2026 בשעות 09:00–15:00.\n📍 אגף ראשי · 2 ז'בוטינסקי, רמת גן\n✅ אנא אשרו השתתפותכם.",
+      messageTitle: "הזמנה לישיבת ועדת מכרזים Q3 2026",
+      message: "שלום,\nאתם מוזמנים לישיבת ועדת מכרזים Q3 2026 בתאריך 20/05/2026 בשעות 09:00–15:00.\n📍 אגף ראשי · 2 ז'בוטינסקי, רמת גן\n✅ אנא אשרו השתתפותכם.",
     },
   },
   // 10. MEETING PAGE + AI AGENDA POPUP — moved here as the agenda step of the flow
@@ -204,9 +204,9 @@ const SLIDES = [
     aiCaption: "מבוסס על תוכנית עבודה ודרישות רגולציה",
     agendaItems: [
       "פתיחה והודעות יו״ר",
-      "דיווח רבעוני — Q1 2026",
-      "אישור תקציב שנתי",
-      "סקירה רגולטורית — דרישות חדשות",
+      "סקירת מכרזים פתוחים",
+      "הערכת הצעות ספקים",
+      "אישור המלצות הוועדה",
       "סיכום והחלטות",
     ],
   },
@@ -218,7 +218,7 @@ const SLIDES = [
     subtitle: "ספר ישיבה דיגיטלי לכל משתתף · סדר יום, מסמכים, החלטות, פרוטוקולים — נגיש מהנייד ומהדסקטופ",
     screenshot: A("/screenshots/meeting-page.png"),
     panelTitle: "שליחת חומרי ישיבה",
-    meetingName: "ישיבת דירקטוריון · Q2 2026",
+    meetingName: "ישיבת ועדת מכרזים · Q3 2026",
     aiTag: "ספר ישיבה דיגיטלי נשלח לכל משתתף",
     materials: [
       { icon: "calendar", label: "סדר יום מלא" },
@@ -245,8 +245,8 @@ const SLIDES = [
     subtitle: "AI Assistant בתוך תיק הישיבה — תשובות מיידיות על כל מסמך, פרוטוקול, או החלטה",
     screenshot: A("/screenshots/meeting-book.png"),
     aiLabel: "AI Document Assistant",
-    question: "מה הוחלט בנושא תקציב 2026 בישיבה האחרונה?",
-    answer: "בישיבת הדירקטוריון מ-12.4.2026 אושר תקציב של 47.3M ש״ח לשנת 2026. ההחלטה התקבלה ברוב של 7 מתוך 8 חברים.",
+    question: "מה הוחלט במכרז ספקי ה-IT האחרון?",
+    answer: "בישיבת ועדת המכרזים מ-12.4.2026 אושרו המלצות הוועדה לבחירת הספק המוביל למכרז 24/2026. ההחלטה התקבלה פה אחד על ידי 5 חברי הוועדה.",
   },
   // 13. MINUTES APPROVAL — automated sign-off flow
   {
@@ -256,7 +256,7 @@ const SLIDES = [
     subtitle: "בחרו חברים — שלחו לחתימה דיגיטלית — קבלו עדכון בזמן אמת",
     screenshot: A("/screenshots/meeting-page.png"),
     panelTitle: "אישור פרוטוקול",
-    meetingName: "ישיבת דירקטוריון · Q1 2026",
+    meetingName: "ישיבת ועדת מכרזים · Q3 2026",
     members: [
       { name: "דנה לוי", role: "יו״ר" },
       { name: "אבי כהן", role: "דירקטור" },
@@ -285,12 +285,12 @@ const SLIDES = [
       panelTitle: "צור משימה חדשה",
       aiTag: "AI ממלא טופס מההחלטה",
       status: "לעשות",
-      name: "מעקב הקצאת תקציב 2026 — Q1",
+      name: "מעקב יישום המלצות מכרז 24/2026",
       assignee: "ניל דהאן",
-      dueDate: "30/06/2026",
+      dueDate: "30/09/2026",
       priority: "גבוהה",
-      description: "מעקב אחרי הקצאת התקציב לרבעון הראשון לפי החלטת הדירקטוריון מ-12.4.2026. נדרש דיווח חודשי לוועדת הכספים.",
-      connection: "החלטה · תקציב 2026 · דירקטוריון 12.4.2026",
+      description: "מעקב אחרי יישום המלצות הוועדה לבחירת ספק במכרז 24/2026. נדרש דיווח חודשי על התקדמות החוזה ועמידת הספק ב-SLA.",
+      connection: "החלטה · מכרז 24/2026 · ועדת מכרזים 12.4.2026",
       cancelLabel: "ביטול",
       createLabel: "צור",
       createdLabel: "נוצר",
@@ -300,7 +300,7 @@ const SLIDES = [
   {
     id: "dashboard",
     type: "dashboard",
-    title: "הכול בתצוגה אחת",
+    title: "תצוגה מותאמת אישית",
     subtitle: "הדשבורד האישי — כל מה שדורש את תשומת הלב שלכם, במקום אחד",
     screenshot: A("/screenshots/dashboard.png"),
     highlights: [
@@ -345,7 +345,7 @@ const SLIDES = [
     id: "field",
     type: "field-results",
     title: "מהעולם הישן — לעולם החדש",
-    subtitle: "אותה עבודה — שבר מהזמן",
+    subtitle: "",
     oldWorld: {
       label: "פעם",
       caption: "ימים, שבועות, ושעות שאף אחד לא יחזיר",
@@ -389,20 +389,6 @@ const SLIDES = [
       { icon: "robot", title: "ה-AI הבשיל", desc: "מה שלפני שנתיים היה מילת באז — היום זה כלי עבודה אמיתי", color: "orange" },
       { icon: "chart", title: "הציפיות השתנו", desc: "ראשי רשויות, מנכ״לים, דירקטורים — רוצים דשבורד, לא אקסל במייל", color: "teal" },
     ],
-    closing: "ארגון שמנהל ועדות בלי מערכת ייעודית ב-2026 — זה כמו ארגון שניהל פיננסים בלי ERP ב-2005.",
-  },
-  // 16. SUMMARY
-  {
-    id: "summary",
-    type: "summary",
-    title: "לסיכום",
-    items: [
-      { label: "הבעיה", text: "מידע מפוזר, אחריות שמתפזרת, סיכון שגדל", color: "red" },
-      { label: "הפתרון", text: "מערכת אחת שמחברת הכול, עם AI ושקיפות מלאה", color: "royalBlue" },
-      { label: "למה עכשיו", text: "הרגולציה, הטכנולוגיה, וציפיות הנהלות השתנו", color: "orange" },
-    ],
-    quote: "ההחלטות שמתקבלות בישיבות הן הלב הפועם של כל ארגון.",
-    question: "השאלה היא רק אם אתם יודעים מה קורה איתן אחרי שכולם יוצאים מהחדר.",
   },
   // 17. CTA / END
   {
@@ -1396,12 +1382,13 @@ function useAgendaCycle(active, totalItems, itemMs = 750, pauseMs = 1800) {
 }
 
 function useChatCycle(active) {
-  // Phase 0: 0-2500ms    user types question
-  // Phase 1: 2500-4200ms typing dots
-  // Phase 2: 4200-11000ms AI types answer
-  // Phase 3: 11000-13500ms pause, then loop
+  // Phase -:  0-3000ms     meeting book visible — chat panel hidden
+  // Phase 0:  3000-5500ms  user types question
+  // Phase 1:  5500-7200ms  typing dots
+  // Phase 2:  7200-14000ms AI types answer
+  // Phase 3:  14000-16500ms pause, then loop
   const [tick, setTick] = useState(0);
-  const cycle = 13500;
+  const cycle = 16500;
   useEffect(() => {
     if (!active) {
       setTick(0);
@@ -1566,9 +1553,11 @@ function MeetingBookChat({ slide, active, accent, circlePos }) {
   const userQ = slide.question;
   const aiA = slide.answer;
   // Reveal progress
-  const userProgress = Math.min(tick / 2500, 1);
-  const showTyping = tick >= 2500 && tick < 4200;
-  const aiStart = 4200;
+  const chatDelay = 3000;
+  const chatShown = tick >= chatDelay;
+  const userProgress = Math.min(Math.max(0, tick - chatDelay) / 2500, 1);
+  const showTyping = tick >= chatDelay + 2500 && tick < chatDelay + 4200;
+  const aiStart = chatDelay + 4200;
   const aiProgress = tick >= aiStart ? Math.min((tick - aiStart) / 6800, 1) : 0;
   const userShown = userQ.slice(0, Math.floor(userQ.length * userProgress));
   const aiShown = aiA.slice(0, Math.floor(aiA.length * aiProgress));
@@ -1588,7 +1577,7 @@ function MeetingBookChat({ slide, active, accent, circlePos }) {
         <div style={{ position: "relative", borderRadius: 16, overflow: "hidden", border: `1px solid ${B.athensGray}`, boxShadow: "0 14px 50px rgba(23,33,52,0.16), 0 4px 14px rgba(23,33,52,0.06)", background: "#FAFBFC", lineHeight: 0, opacity: active ? 1 : 0, transform: active ? "scale(1)" : "scale(0.96)", transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 500ms" }}>
           <img src={slide.screenshot} alt={slide.title} style={{ display: "block", width: "100%", maxHeight: "62vh", objectFit: "contain" }} />
           {/* Dim overlay (subtle, since chat is on the side) */}
-          <div style={{ position: "absolute", inset: 0, background: "rgba(23,33,52,0.18)", opacity: active ? 1 : 0, transition: "opacity 0.7s ease 800ms" }} />
+          <div style={{ position: "absolute", inset: 0, background: "rgba(23,33,52,0.18)", opacity: active && chatShown ? 1 : 0, transition: "opacity 0.7s ease" }} />
           {/* Chat panel — right side (RTL: appears on right edge) */}
           <div
             dir="rtl"
@@ -1600,9 +1589,9 @@ function MeetingBookChat({ slide, active, accent, circlePos }) {
               background: B.white,
               boxShadow: "0 18px 60px rgba(23,33,52,0.32)",
               border: `1px solid ${B.athensGray}`,
-              opacity: active ? 1 : 0,
-              transform: active ? "translateX(0)" : "translateX(40px)",
-              transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 950ms",
+              opacity: active && chatShown ? 1 : 0,
+              transform: active && chatShown ? "translateX(0)" : "translateX(40px)",
+              transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
               display: "flex",
               flexDirection: "column",
               overflow: "hidden",
@@ -1628,7 +1617,7 @@ function MeetingBookChat({ slide, active, accent, circlePos }) {
                 <div style={{ fontSize: 10, fontWeight: 600, color: B.gullGray, marginBottom: 4 }}>אתה</div>
                 <div style={{ padding: "10px 12px", borderRadius: "12px 12px 12px 4px", background: B.bigStone, color: B.white, fontSize: 12, fontWeight: 400, lineHeight: 1.5 }}>
                   {userShown}
-                  {tick < 2500 && active && <span style={{ display: "inline-block", width: 1, height: 11, background: B.white, marginInlineStart: 2, animation: "blinkCaret 0.9s steps(2) infinite", verticalAlign: "middle" }} />}
+                  {tick >= chatDelay && tick < chatDelay + 2500 && active && <span style={{ display: "inline-block", width: 1, height: 11, background: B.white, marginInlineStart: 2, animation: "blinkCaret 0.9s steps(2) infinite", verticalAlign: "middle" }} />}
                 </div>
               </div>
               {/* Typing indicator */}
@@ -1679,7 +1668,7 @@ function MeetingBookChat({ slide, active, accent, circlePos }) {
 /* ─── 10. DECISION TRACKER ─── */
 function useTaskCycle(active) {
   const [tick, setTick] = useState(0);
-  const cycle = 19500;
+  const cycle = 22500;
   useEffect(() => {
     if (!active) {
       setTick(0);
@@ -1697,18 +1686,18 @@ const clamp01 = (v) => Math.max(0, Math.min(1, v));
 function DecisionTracker({ slide, active, accent, circlePos }) {
   const tick = useTaskCycle(active);
   const t = slide.task;
-  // Phases (viewer sees the decision-tracker page for ~3s before the drawer opens)
-  const drawerIn = tick >= 3000;
-  const nameProg = clamp01((tick - 4400) / 2400);
+  // Phases (viewer sees the decision-tracker page for ~6s before the drawer opens)
+  const drawerIn = tick >= 6000;
+  const nameProg = clamp01((tick - 7400) / 2400);
   const nameShown = t.name.slice(0, Math.floor(t.name.length * nameProg));
-  const showAssignee = tick >= 7200;
-  const showDate = tick >= 8000;
-  const showPriority = tick >= 8800;
-  const descProg = clamp01((tick - 9800) / 2800);
+  const showAssignee = tick >= 10200;
+  const showDate = tick >= 11000;
+  const showPriority = tick >= 11800;
+  const descProg = clamp01((tick - 12800) / 2800);
   const descShown = t.description.slice(0, Math.floor(t.description.length * descProg));
-  const showConnection = tick >= 13200;
-  const buttonPulse = tick >= 14000 && tick < 15100;
-  const created = tick >= 15100;
+  const showConnection = tick >= 16200;
+  const buttonPulse = tick >= 17000 && tick < 18100;
+  const created = tick >= 18100;
 
   return (
     <SlideWrap active={active}>
@@ -1805,7 +1794,7 @@ function TaskDrawer({ active, drawerIn, t, nameShown, nameTyping, showAssignee, 
         <div style={{ padding: "14px 18px", borderBottom: `1px solid ${B.athensGray}`, background: "#FBFCFE" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <div style={{ flex: 1, fontSize: 16, fontWeight: 800, color: B.bigStone }}>{t.panelTitle}</div>
-            <div style={{ padding: "5px 11px", borderRadius: 8, border: `1px solid ${B.athensGray}`, fontSize: 11, color: B.bigStone, fontWeight: 500 }}>
+            <div style={{ padding: "7px 14px 8px 14px", borderRadius: 8, border: `1px solid ${B.athensGray}`, fontSize: 11.5, color: B.bigStone, fontWeight: 500, display: "inline-flex", alignItems: "center", lineHeight: 1 }}>
               {t.cancelLabel}
             </div>
             <div
@@ -1848,19 +1837,15 @@ function TaskDrawer({ active, drawerIn, t, nameShown, nameTyping, showAssignee, 
               )}
             </div>
           </div>
-          {/* Status pill + AI tag */}
-          <div style={{ marginTop: 10, display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ padding: "3px 10px", borderRadius: 14, border: `1px solid ${B.athensGray}`, background: B.white, fontSize: 10, color: B.bigStone, fontWeight: 600, display: "flex", alignItems: "center", gap: 4 }}>
-              {t.status}
-              <span style={{ fontSize: 8, color: B.cadetBlue }}>▾</span>
-            </div>
-            {!created && (
+          {/* AI tag */}
+          {!created && (
+            <div style={{ marginTop: 10, display: "flex", alignItems: "center", gap: 8 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "3px 10px", borderRadius: 14, background: `linear-gradient(135deg, ${B.orange}10, ${B.royalBlue}10)`, border: `1px solid ${B.orange}30`, fontSize: 10, fontWeight: 600, color: B.bigStone }}>
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: B.orange, animation: active ? "breathe 1.4s ease-in-out infinite" : "none" }} />
                 {t.aiTag}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         {/* Body */}
@@ -2286,31 +2271,18 @@ function FieldResults({ slide, active, accent, circlePos }) {
       <DecoCircle color={accent} position={circlePos} />
       <div style={{ zIndex: 2, maxWidth: 1320, width: "100%" }}>
         {/* Title */}
-        <div style={{ textAlign: "center", marginBottom: 22 }}>
+        <div style={{ textAlign: "center", marginBottom: 52 }}>
           <div
             style={{
               fontSize: "clamp(24px, 3.6vw, 38px)",
               fontWeight: 800,
               color: B.bigStone,
-              marginBottom: 8,
               opacity: active ? 1 : 0,
               transform: active ? "translateY(0)" : "translateY(20px)",
               transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 200ms",
             }}
           >
             {slide.title}
-          </div>
-          <div
-            style={{
-              fontSize: "clamp(13px, 1.6vw, 16px)",
-              fontWeight: 300,
-              color: B.gullGray,
-              opacity: active ? 1 : 0,
-              transform: active ? "translateY(0)" : "translateY(15px)",
-              transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 350ms",
-            }}
-          >
-            {slide.subtitle}
           </div>
         </div>
 
@@ -2373,15 +2345,10 @@ function OldWorldPanel({ data, active }) {
         }}
       />
 
-      {/* Header */}
-      <div style={{ position: "relative", textAlign: "center", marginBottom: 8 }}>
-        <div style={{ fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.55)" }}>
-          {data.caption}
-        </div>
-      </div>
+
 
       {/* Scattered cards + chaos overlays */}
-      <div style={{ position: "relative", height: "calc(100% - 60px)" }}>
+      <div style={{ position: "relative", height: "100%" }}>
         {data.cards.map((c, i) => {
           const pos = OLD_CARD_POS[i] || {};
           // Stagger the sway so all cards aren't moving in sync
@@ -2629,22 +2596,16 @@ function NewWorldPanel({ data, active }) {
         transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 650ms",
         display: "flex",
         flexDirection: "column",
+        justifyContent: "center",
       }}
     >
-      {/* Header */}
-      <div style={{ textAlign: "center", marginBottom: 14 }}>
-        <div style={{ fontSize: 13, fontWeight: 500, color: B.gullGray }}>
-          {data.caption}
-        </div>
-      </div>
 
       {/* Transformations */}
       <div
         style={{
-          flex: 1,
           display: "flex",
           flexDirection: "column",
-          gap: 8,
+          gap: 14,
           overflow: "hidden",
         }}
       >
@@ -2851,9 +2812,11 @@ function WhyNow({ slide, active, accent, circlePos }) {
             );
           })}
         </div>
-        <div style={{ marginTop: 38, padding: "20px 26px", borderRadius: 14, background: B.bigStone, color: B.white, textAlign: "center", fontSize: "clamp(14px, 1.8vw, 18px)", fontWeight: 500, lineHeight: 1.55, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(20px)", transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1200ms" }}>
-          {slide.closing}
-        </div>
+        {slide.closing && (
+          <div style={{ marginTop: 38, padding: "20px 26px", borderRadius: 14, background: B.bigStone, color: B.white, textAlign: "center", fontSize: "clamp(14px, 1.8vw, 18px)", fontWeight: 500, lineHeight: 1.55, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(20px)", transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1200ms" }}>
+            {slide.closing}
+          </div>
+        )}
       </div>
     </SlideWrap>
   );
@@ -3302,10 +3265,7 @@ function CreateCommitteePopup({
             <div style={{ height: 23, padding: "0 14px", borderRadius: 10, border: `1px solid ${B.orange}40`, color: B.orange, fontSize: 11.5, fontWeight: 600, display: "inline-flex", alignItems: "center", lineHeight: 1, boxSizing: "border-box" }}>
               {slide.cancelLabel}
             </div>
-            <PrimaryActionBtn active={active} pulse={pulse} done={done} doneLabel={slide.createdLabel} label={slide.createLabel} onAI />
-          </div>
-          <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 8 }}>
-            {!done && <AIPill active={active} label={slide.aiTag} />}
+            <PrimaryActionBtn active={active} pulse={pulse} done={done} doneLabel={slide.createdLabel} label={slide.createLabel} />
           </div>
         </div>
 
@@ -4056,10 +4016,6 @@ function SendMaterials({ slide, active, accent, circlePos }) {
                   </div>
                 );
               })}
-            </div>
-
-            <div style={{ marginTop: 12 }}>
-              <AIPill active={active} label={slide.aiTag} />
             </div>
 
             <div
