@@ -149,36 +149,44 @@ const SLIDES = [
     ],
     transition: "ואיך זה נראה בפועל?",
   },
-  // 10. HOW IT LOOKS IN PRACTICE – product walkthrough with screenshots
+  // 10. IN PRACTICE — before the meeting (same title/subtitle, screen changes)
   {
-    id: "practice",
-    type: "walkthrough",
+    id: "practice-before",
+    type: "practice-step",
+    step: 1,
     title: "ואיך זה נראה בפועל?",
     subtitle: "מחזור החיים המלא של החלטה – רציף, מתועד ומפוקח. מהתכנון, דרך הדיון, ועד המעקב.",
-    phases: [
-      {
-        tag: "לפני הישיבה",
-        color: "royalBlue",
-        shot: A("/screenshots/committees.png"),
-        title: "הכול מתחיל בתכנון",
-        text: "תוכנית העבודה השנתית של הוועדה במערכת, וממנה נגזרים סדרי היום והזימונים. החומרים נאספים, מופצים ומתעדכנים במקום אחד – וההרשאות מבטיחות שכל משתתף רואה רק את מה שמותר לו, גם בניגוד עניינים.",
-      },
-      {
-        tag: "במהלך הישיבה",
-        color: "orange",
-        shot: A("/screenshots/meeting-page.png"),
-        title: "הכול מתועד ברצף אחד",
-        text: "הדיון, ההצבעות וההחלטות מתועדים כחלק מאותו רצף עבודה. הפרוטוקול נבנה מתוך הדיון עצמו, עובר לאישור, ננעל ונחתם דיגיטלית.",
-      },
-      {
-        tag: "אחרי הישיבה",
-        color: "teal",
-        shot: A("/screenshots/decision-tracker.png"),
-        title: "מהחלטה למשימה",
-        text: "ההחלטות לא נשארות בפרוטוקול – הן הופכות למשימות עם אחראי, לוחות זמנים ומעקב. בכל רגע רואים מה הושלם, מה בטיפול, ומה עדיין פתוח.",
-      },
-    ],
-    footer: "ומעל כל אלה נשמר רצף אחד של מידע. גם בעוד שנתיים, כשמגיעה ביקורת, אפשר לראות לא רק מה הוחלט – אלא איך התקבלה ההחלטה, מי היה מעורב, ואיך היא יושמה.",
+    tag: "לפני הישיבה",
+    color: "royalBlue",
+    shot: A("/screenshots/committees.png"),
+    stepTitle: "הכול מתחיל בתכנון",
+    text: "תוכנית העבודה השנתית של הוועדה במערכת, וממנה נגזרים סדרי היום והזימונים. החומרים נאספים, מופצים ומתעדכנים במקום אחד – וההרשאות מבטיחות שכל משתתף רואה רק את מה שמותר לו, גם בניגוד עניינים.",
+  },
+  // 11. IN PRACTICE — during the meeting
+  {
+    id: "practice-during",
+    type: "practice-step",
+    step: 2,
+    title: "ואיך זה נראה בפועל?",
+    subtitle: "מחזור החיים המלא של החלטה – רציף, מתועד ומפוקח. מהתכנון, דרך הדיון, ועד המעקב.",
+    tag: "במהלך הישיבה",
+    color: "orange",
+    shot: A("/screenshots/meeting-page.png"),
+    stepTitle: "הכול מתועד ברצף אחד",
+    text: "הדיון, ההצבעות וההחלטות מתועדים כחלק מאותו רצף עבודה. הפרוטוקול נבנה מתוך הדיון עצמו, עובר לאישור, ננעל ונחתם דיגיטלית.",
+  },
+  // 12. IN PRACTICE — after the meeting
+  {
+    id: "practice-after",
+    type: "practice-step",
+    step: 3,
+    title: "ואיך זה נראה בפועל?",
+    subtitle: "מחזור החיים המלא של החלטה – רציף, מתועד ומפוקח. מהתכנון, דרך הדיון, ועד המעקב.",
+    tag: "אחרי הישיבה",
+    color: "teal",
+    shot: A("/screenshots/decision-tracker.png"),
+    stepTitle: "מהחלטה למשימה",
+    text: "ההחלטות לא נשארות בפרוטוקול – הן הופכות למשימות עם אחראי, לוחות זמנים ומעקב. בכל רגע רואים מה הושלם, מה בטיפול, ומה עדיין פתוח.",
   },
   // 16. CLOSING THOUGHT
   {
@@ -216,7 +224,9 @@ const ACCENTS = {
   system: "teal",
   brand: "royalBlue",
   chain: "teal",
-  practice: "teal",
+  "practice-before": "royalBlue",
+  "practice-during": "orange",
+  "practice-after": "teal",
   thought: "orange",
   final: "royalBlue",
 };
@@ -237,7 +247,9 @@ const CIRCLE_POS = {
   system: { top: "-140px", left: "-140px", right: "auto" },
   brand: { top: "-150px", right: "-150px", left: "auto" },
   chain: { bottom: "-180px", left: "-180px", right: "auto", top: "auto" },
-  practice: { bottom: "-180px", left: "-180px", right: "auto", top: "auto" },
+  "practice-before": { top: "-120px", left: "-120px", right: "auto" },
+  "practice-during": { top: "-120px", right: "-120px", left: "auto" },
+  "practice-after": { bottom: "-180px", left: "-180px", right: "auto", top: "auto" },
   thought: { top: "-130px", right: "-130px", left: "auto" },
   final: { top: "-150px", left: "-150px", right: "auto" },
 };
@@ -645,7 +657,7 @@ function renderSlide(slide, idx, active, accent, circlePos) {
     case "evolution": return <Evolution key={k} {...common} />;
     case "approach": return <Approach key={k} {...common} />;
     case "brand-reveal": return <BrandReveal key={k} {...common} />;
-    case "walkthrough": return <Walkthrough key={k} {...common} />;
+    case "practice-step": return <PracticeStep key={k} {...common} />;
     case "chain": return <Chain key={k} {...common} />;
     case "two-questions": return <TwoQuestions key={k} {...common} />;
     case "final": return <Final key={k} {...common} />;
@@ -1119,45 +1131,46 @@ function BrandReveal({ slide, active, accent, circlePos }) {
   );
 }
 
-/* ─── 10. WALKTHROUGH (product tour with real screenshots) ─── */
-function Walkthrough({ slide, active, accent, circlePos }) {
+/* ─── 10–12. PRACTICE STEP (constant title/subtitle, screen changes) ─── */
+function PracticeStep({ slide, active, accent, circlePos }) {
+  const c = tone(slide.color);
   return (
     <SlideWrap active={active}>
       <DecoCircle color={accent} position={circlePos} />
-      <div style={{ zIndex: 2, maxWidth: 1320, width: "100%" }}>
-        <div style={{ textAlign: "center", marginBottom: 20 }}>
-          <div style={{ fontSize: "clamp(24px, 3.6vw, 38px)", fontWeight: 800, color: B.bigStone, marginBottom: 8, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(20px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 200ms" }}>
+      <div style={{ zIndex: 2, maxWidth: 1160, width: "100%" }}>
+        {/* Constant header — same on all three slides */}
+        <div style={{ textAlign: "center", marginBottom: 14 }}>
+          <div style={{ fontSize: "clamp(22px, 3.4vw, 34px)", fontWeight: 800, color: B.bigStone, marginBottom: 7, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(20px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 200ms" }}>
             {slide.title}
           </div>
-          <div style={{ fontSize: "clamp(13px, 1.6vw, 16px)", fontWeight: 300, color: B.gullGray, lineHeight: 1.55, maxWidth: 780, margin: "0 auto", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 350ms" }}>
+          <div style={{ fontSize: "clamp(12px, 1.5vw, 15px)", fontWeight: 300, color: B.gullGray, lineHeight: 1.5, maxWidth: 760, margin: "0 auto", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 320ms" }}>
             {slide.subtitle}
           </div>
         </div>
-        <div style={{ display: "flex", gap: 16, alignItems: "stretch" }}>
-          {slide.phases.map((ph, i) => {
-            const c = tone(ph.color);
-            return (
-              <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", borderRadius: 18, background: B.white, border: `1px solid ${B.athensGray}`, boxShadow: "0 6px 24px rgba(23,33,52,0.07)", overflow: "hidden", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(34px)", transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${450 + i * 190}ms` }}>
-                <div style={{ position: "relative", height: 156, overflow: "hidden", borderBottom: `1px solid ${B.athensGray}`, background: "#FAFBFC", lineHeight: 0 }}>
-                  <img src={ph.shot} alt={ph.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} />
-                  <div style={{ position: "absolute", top: 12, right: 12, padding: "5px 13px", borderRadius: 999, background: c, color: B.white, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, boxShadow: `0 4px 12px ${c}55` }}>
-                    {ph.tag}
-                  </div>
-                </div>
-                <div style={{ padding: "16px 18px 20px", flex: 1, display: "flex", flexDirection: "column", textAlign: "right", position: "relative" }}>
-                  <div style={{ position: "absolute", top: 0, right: 0, width: 4, height: "100%", background: c }} />
-                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 9 }}>
-                    <span style={{ width: 7, height: 7, borderRadius: "50%", background: c, flexShrink: 0 }} />
-                    <div style={{ fontSize: "clamp(15px, 1.8vw, 18px)", fontWeight: 800, color: B.bigStone }}>{ph.title}</div>
-                  </div>
-                  <div style={{ fontSize: "clamp(12px, 1.35vw, 14px)", fontWeight: 300, color: B.gullGray, lineHeight: 1.6 }}>{ph.text}</div>
-                </div>
-              </div>
-            );
-          })}
+
+        {/* Changing middle — phase caption */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 7, marginBottom: 14 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(12px)", transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 450ms" }}>
+            <div style={{ padding: "5px 14px", borderRadius: 999, background: c, color: B.white, fontSize: 12.5, fontWeight: 800, letterSpacing: 0.3, boxShadow: `0 4px 12px ${c}50` }}>
+              {slide.tag}
+            </div>
+            <div style={{ fontSize: "clamp(16px, 2vw, 21px)", fontWeight: 800, color: B.bigStone }}>{slide.stepTitle}</div>
+            <div style={{ display: "flex", alignItems: "center", gap: 5, marginInlineStart: 4 }}>
+              {[1, 2, 3].map((n) => (
+                <span key={n} style={{ width: n === slide.step ? 16 : 7, height: 7, borderRadius: 4, background: n === slide.step ? c : B.athensGray, transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }} />
+              ))}
+            </div>
+          </div>
+          <div style={{ fontSize: "clamp(12px, 1.45vw, 15px)", fontWeight: 300, color: B.gullGray, lineHeight: 1.55, maxWidth: 840, textAlign: "center", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(12px)", transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 600ms" }}>
+            {slide.text}
+          </div>
         </div>
-        <div style={{ marginTop: 20, padding: "14px 26px", borderRadius: 14, background: B.bigStone, color: B.white, textAlign: "center", fontSize: "clamp(12px, 1.5vw, 15px)", fontWeight: 500, lineHeight: 1.55, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(18px)", transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1150ms" }}>
-          {slide.footer}
+
+        {/* Changing middle — the screen */}
+        <div style={{ textAlign: "center" }}>
+          <div style={{ display: "inline-block", borderRadius: 16, overflow: "hidden", border: `1px solid ${B.athensGray}`, boxShadow: "0 16px 50px rgba(23,33,52,0.16), 0 4px 14px rgba(23,33,52,0.06)", background: "#FAFBFC", lineHeight: 0, maxWidth: "100%", opacity: active ? 1 : 0, transform: active ? "translateY(0) scale(1)" : "translateY(24px) scale(0.97)", transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 700ms" }}>
+            <img src={slide.shot} alt={slide.stepTitle} style={{ display: "block", maxHeight: "50vh", maxWidth: "100%", width: "auto", height: "auto" }} />
+          </div>
         </div>
       </div>
     </SlideWrap>
