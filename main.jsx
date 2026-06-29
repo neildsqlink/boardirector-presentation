@@ -1,4 +1,4 @@
 import { createRoot } from "react-dom/client";
-import PresentationNimbus from "./presentation-nimbus.jsx";
+import PresentationProcess from "./presentation-process.jsx";
 
-createRoot(document.getElementById("root")).render(<PresentationNimbus />);
+createRoot(document.getElementById("root")).render(<PresentationProcess />);
