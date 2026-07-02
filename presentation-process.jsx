@@ -1,4 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+// Reuse the animated demo slides from the Nimbus deck (self-contained via the
+// shared brand tokens/helpers) so the walkthrough screens animate identically.
+import { MeetingPageAI, MinutesApproval, DecisionTracker, MeetingBookChat } from "./presentation-nimbus.jsx";
 
 // Resolve a public-folder path to the deployed base URL so assets work both
 // at "/" (npm run dev) and under a sub-path (GitHub Pages).
@@ -56,10 +59,10 @@ const SLIDES = [
     id: "pivot",
     type: "statement",
     eyebrow: "הנקודה המרכזית",
-    headline: "מרחב הבעיה זז.",
+    headline: "הבעיה עצמה זזה.",
     lines: [
-      "הוא כבר לא נמצא בתוך המשימות.",
-      "הוא נמצא בשלבים שביניהן.",
+      "היא כבר לא נמצאת בתוך המשימות.",
+      "היא נמצאת במעברים שביניהן.",
     ],
     footer: "שיפרנו כמעט כל שלב בנפרד – עכשיו הפוקוס צריך לעבור לתהליך.",
   },
@@ -137,6 +140,18 @@ const SLIDES = [
     ],
     footer: "ודווקא את זה – הכי קשה לשחזר.",
   },
+  // 8.5 EVOLUTION BRIDGE — where does this lead?
+  {
+    id: "evolution",
+    type: "evolution",
+    title: "אז לאן כל זה מוביל?",
+    steps: [
+      { era: "לפני עשר שנים", text: "דיגיטציה של רכיבים", color: "gullGray" },
+      { era: "היום", text: "AI שמבצע חלק מהמשימות באופן עצמאי", color: "royalBlue" },
+      { era: "השלב הבא", text: "ניהול התהליך כולו", color: "orange" },
+    ],
+    footer: "השלב הבא כבר אינו עוד כלי.",
+  },
   // 9. BRAND REVEAL
   {
     id: "brand",
@@ -144,49 +159,122 @@ const SLIDES = [
     eyebrow: "וזאת בדיוק התפיסה שממנה בנינו את",
     brand: "Boardirector",
     lines: [
-      "לא שאלנו איך בונים עוד כלי טוב לניהול ישיבות, מסמכים או משימות.",
-      "שאלנו איך מנהלים את מחזור החיים המלא של החלטה.",
+      "לא שאלנו איך בונים עוד כלי טוב לניהול ישיבות.",
+      "שאלנו איך מנהלים את מחזור החיים המלא של החלטה – מהרגע שהיא עולה על סדר היום, ועד שנים אחרי שהתקבלה.",
     ],
     transition: "ואיך זה נראה בפועל?",
   },
-  // 10. IN PRACTICE — before the meeting (same title/subtitle, screen changes)
+  // 10. IN PRACTICE — before the meeting (animated: AI agenda builder)
   {
     id: "practice-before",
-    type: "practice-step",
-    step: 1,
+    type: "meeting-page-ai",
     title: "ואיך זה נראה בפועל?",
-    subtitle: "מחזור החיים המלא של החלטה – רציף, מתועד ומפוקח. מהתכנון, דרך הדיון, ועד המעקב.",
-    tag: "לפני הישיבה",
-    color: "royalBlue",
-    shot: A("/screenshots/dashboard.png"),
-    stepTitle: "הכול מתחיל בתכנון",
-    text: "תוכנית העבודה השנתית של הוועדה במערכת, וממנה נגזרים סדרי היום והזימונים. החומרים נאספים, מופצים ומתעדכנים במקום אחד – וההרשאות מבטיחות שכל משתתף רואה רק את מה שמותר לו, גם בניגוד עניינים.",
+    subtitle: "לפני הישיבה — סדר היום נגזר מתוכנית העבודה, וה‑AI מציע את הסעיפים.",
+    screenshot: A("/screenshots/meeting-page.png"),
+    aiLabel: "AI Agenda Builder",
+    aiHeadline: "בונה סדר יום אוטומטי",
+    aiCaption: "מבוסס על תוכנית העבודה השנתית ודרישות הרגולציה",
+    agendaItems: [
+      "פתיחה והודעות יו״ר",
+      "אישור פרוטוקול קודם",
+      "סקירת תוכנית העבודה",
+      "עדכוני ועדות משנה",
+      "קבלת החלטות",
+    ],
   },
-  // 11. IN PRACTICE — during the meeting
+  // 11. IN PRACTICE — during the meeting (animated: digital signature)
   {
     id: "practice-during",
-    type: "practice-step",
-    step: 2,
+    type: "minutes-approval",
     title: "ואיך זה נראה בפועל?",
-    subtitle: "מחזור החיים המלא של החלטה – רציף, מתועד ומפוקח. מהתכנון, דרך הדיון, ועד המעקב.",
-    tag: "במהלך הישיבה",
-    color: "orange",
-    shot: A("/screenshots/meeting-page.png"),
-    stepTitle: "הכול מתועד ברצף אחד",
-    text: "הדיון, ההצבעות וההחלטות מתועדים כחלק מאותו רצף עבודה. הפרוטוקול נבנה מתוך הדיון עצמו, עובר לאישור, ננעל ונחתם דיגיטלית.",
+    subtitle: "במהלך הישיבה — הפרוטוקול נבנה מהדיון, עובר לאישור ונחתם דיגיטלית.",
+    screenshot: A("/screenshots/meeting-page.png"),
+    panelTitle: "אישור פרוטוקול",
+    meetingName: "ישיבת ועדת מכרזים · Q3 2026",
+    members: [
+      { name: "דנה לוי", role: "יו״ר" },
+      { name: "אבי כהן", role: "דירקטור" },
+      { name: "רונית גולן", role: "דירקטורית" },
+      { name: "משה ברק", role: "דירקטור" },
+      { name: "שרה דוד", role: "מבקרת" },
+    ],
+    buttonLabel: "שלח לחתימה דיגיטלית",
+    sentLabel: "נשלח לחתימה",
   },
-  // 12. IN PRACTICE — after the meeting
+  // 12. IN PRACTICE — after the meeting (animated: decision → task drawer)
   {
     id: "practice-after",
-    type: "practice-step",
-    step: 3,
+    type: "decision-tracker",
     title: "ואיך זה נראה בפועל?",
-    subtitle: "מחזור החיים המלא של החלטה – רציף, מתועד ומפוקח. מהתכנון, דרך הדיון, ועד המעקב.",
-    tag: "אחרי הישיבה",
-    color: "teal",
-    shot: A("/screenshots/decision-tracker.png"),
-    stepTitle: "מהחלטה למשימה",
-    text: "ההחלטות לא נשארות בפרוטוקול – הן הופכות למשימות עם אחראי, לוחות זמנים ומעקב. בכל רגע רואים מה הושלם, מה בטיפול, ומה עדיין פתוח.",
+    subtitle: "אחרי הישיבה — כל החלטה הופכת למשימה עם אחראי, יעד ומעקב.",
+    screenshot: A("/screenshots/decision-tracker.png"),
+    highlights: [
+      { icon: "target", text: "כל החלטה מקושרת לוועדה, לנושא ולישיבה" },
+      { icon: "user", text: "אחראי, סטטוס ותאריך יעד לכל פריט" },
+      { icon: "check", text: "מעקב משימות שנגזרו מההחלטה" },
+      { icon: "search", text: "סינון לפי ועדה, תאריך ומצב ביצוע" },
+    ],
+    footer: "בכל רגע רואים מה הושלם, מה בטיפול, ומה עדיין פתוח.",
+    task: {
+      panelTitle: "צור משימה חדשה",
+      aiTag: "AI ממלא טופס מההחלטה",
+      status: "לעשות",
+      name: "מעקב יישום המלצות מכרז 24/2026",
+      assignee: "בר לב",
+      dueDate: "30/09/2026",
+      priority: "גבוהה",
+      description: "מעקב אחרי יישום המלצות הוועדה לבחירת ספק במכרז 24/2026. נדרש דיווח חודשי על ההתקדמות והעמידה ב‑SLA.",
+      connection: "החלטה · מכרז 24/2026 · ועדת מכרזים 12.4.2026",
+      cancelLabel: "ביטול",
+      createLabel: "צור",
+      createdLabel: "נוצר",
+    },
+  },
+  // 13. IN PRACTICE — AI inside the process (animated: AI document chat)
+  {
+    id: "practice-ai",
+    type: "meeting-book-chat",
+    title: "ואיך זה נראה בפועל?",
+    subtitle: "לאורך כל התהליך — ה‑AI עונה מתוך ההקשר המלא של הישיבה.",
+    screenshot: A("/screenshots/meeting-book.png"),
+    aiLabel: "AI Document Assistant",
+    question: "מה הוחלט במכרז ספקי ה‑IT האחרון?",
+    answer: "בישיבת ועדת המכרזים מ‑12.4.2026 אושרו המלצות הוועדה לבחירת הספק המוביל למכרז 24/2026. ההחלטה התקבלה פה אחד על ידי 5 חברי הוועדה.",
+  },
+  // 13. CLIENTS — social proof carousel
+  {
+    id: "clients",
+    type: "clients",
+    title: "וזה כבר עובד היום – במאות ארגונים",
+    subtitle: "חברות ציבוריות וממשלתיות, רשויות מקומיות, מוסדות אקדמיים ועוד – כולם מנהלים את התהליך בצורה אחת, רציפה ומתועדת.",
+    logos: [
+      "leumi.svg",
+      "discount.png",
+      "הבנק_הבינלאומי.svg 1.png",
+      "לוגו_של_בנק_מזרחי-טפחות.svg 1.png",
+      "isracard-logo-print-1024x996 1.png",
+      "migdal.png",
+      "מנורה_מבטחים_לוגו.svg 1.png",
+      "אלטשולר_שחם 1.png",
+      "לוגו_מיטב_בית_השקעות.svg 1.png",
+      "אקסלנס-לוגו-002 1.png",
+      "Amitim_Logo_Tagline_RGB-2 1.png",
+      "clalit.svg",
+      "assuta-2 1.png",
+      "לוגו-מדיקה 1.png",
+      "amdocs.png",
+      "strauss.png",
+      "tnuva.png",
+      "elal.png",
+      "ayalon.png",
+      "פלאפון-שירות-לקוחות-לוגו-757x1024 1.png",
+      "אלקטרה-פאוור-סופר-גז-חשמל 1.png",
+      "Bar_Ilan_logo 1.png",
+      "gcity.png",
+      "wesure.png",
+      "RAMILEVI 1.png",
+      "delek.png",
+    ],
   },
   // 16. CLOSING THOUGHT
   {
@@ -195,7 +283,7 @@ const SLIDES = [
     eyebrow: "מחשבה אחת להשאיר אתכם איתה",
     intro: "בפעם הבאה שאתם בוחנים את תהליך קבלת ההחלטות בארגון שלכם –",
     dim: "אל תשאלו רק: האם יש כלי לכל שלב?",
-    bright: "תשאלו: מי מנהל את התהליך שמחבר ביניהם?",
+    bright: "תשאלו: מי מנהל את התהליך כולו?",
   },
   // 17. FINAL
   {
@@ -227,6 +315,8 @@ const ACCENTS = {
   "practice-before": "royalBlue",
   "practice-during": "orange",
   "practice-after": "teal",
+  "practice-ai": "royalBlue",
+  clients: "royalBlue",
   thought: "orange",
   final: "royalBlue",
 };
@@ -250,6 +340,8 @@ const CIRCLE_POS = {
   "practice-before": { top: "-120px", left: "-120px", right: "auto" },
   "practice-during": { top: "-120px", right: "-120px", left: "auto" },
   "practice-after": { bottom: "-180px", left: "-180px", right: "auto", top: "auto" },
+  "practice-ai": { top: "-130px", right: "-130px", left: "auto" },
+  clients: { top: "-130px", right: "-130px", left: "auto" },
   thought: { top: "-130px", right: "-130px", left: "auto" },
   final: { top: "-150px", left: "-150px", right: "auto" },
 };
@@ -577,6 +669,19 @@ export default function PresentationProcess() {
         @keyframes particleFloat { 0%, 100% { transform: translate(0, 0); opacity: 0.15; } 50% { transform: translate(8px, -14px); opacity: 0.35; } }
         @keyframes popIn { 0% { transform: scale(0.6); opacity: 0; } 60% { transform: scale(1.06); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
         @keyframes dashFlow { to { stroke-dashoffset: -28; } }
+        @keyframes marqueeLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes marqueeRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+        @keyframes blinkCaret { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+        @keyframes typingDot { 0%, 80%, 100% { transform: translateY(0) scale(0.85); opacity: 0.4; } 40% { transform: translateY(-3px) scale(1.1); opacity: 1; } }
+        @keyframes scanLine { 0% { transform: translateY(-100%); opacity: 0; } 25% { opacity: 1; } 75% { opacity: 1; } 100% { transform: translateY(120%); opacity: 0; } }
+
+        /* Animated conic-gradient angle for AI rims (used by the reused Nimbus demos) */
+        @property --ai-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+        @keyframes spinAngle { from { --ai-angle: 0deg; } to { --ai-angle: 360deg; } }
+        .ai-rim, .ai-rim-glow { animation: spinAngle 3s linear infinite; }
+        @supports not (background: conic-gradient(from var(--ai-angle, 0deg), red, blue)) {
+          .ai-rim, .ai-rim-glow { animation: none; }
+        }
         @keyframes driftLeak { 0% { transform: translate(0,0) scale(0.7); opacity: 0; } 25% { opacity: 1; } 100% { transform: translate(var(--lx,-50px), var(--ly,30px)) rotate(var(--lr,-20deg)) scale(0.9); opacity: 0; } }
         ::selection { background: rgba(254,117,1,0.2); }
       `}</style>
@@ -658,6 +763,11 @@ function renderSlide(slide, idx, active, accent, circlePos) {
     case "approach": return <Approach key={k} {...common} />;
     case "brand-reveal": return <BrandReveal key={k} {...common} />;
     case "practice-step": return <PracticeStep key={k} {...common} />;
+    case "meeting-page-ai": return <MeetingPageAI key={k} {...common} />;
+    case "minutes-approval": return <MinutesApproval key={k} {...common} />;
+    case "decision-tracker": return <DecisionTracker key={k} {...common} />;
+    case "meeting-book-chat": return <MeetingBookChat key={k} {...common} />;
+    case "clients": return <Clients key={k} {...common} />;
     case "chain": return <Chain key={k} {...common} />;
     case "two-questions": return <TwoQuestions key={k} {...common} />;
     case "final": return <Final key={k} {...common} />;
@@ -913,10 +1023,7 @@ function ToolsGrid({ slide, active, accent, circlePos }) {
                 <div style={{ width: 60, height: 60, borderRadius: 16, background: `${c}12`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px" }}>
                   <FlatIcon name={t.icon} size={30} color={c} />
                 </div>
-                <div style={{ fontSize: "clamp(14px, 1.7vw, 17px)", fontWeight: 700, color: B.bigStone, marginBottom: 10 }}>{t.title}</div>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 5, fontSize: 11.5, fontWeight: 700, color: B.green }}>
-                  <FlatIcon name="check" size={13} color={B.green} /> עושה את העבודה
-                </div>
+                <div style={{ fontSize: "clamp(14px, 1.7vw, 17px)", fontWeight: 700, color: B.bigStone }}>{t.title}</div>
               </div>
             );
           })}
@@ -1098,6 +1205,65 @@ function Approach({ slide, active, accent, circlePos }) {
   );
 }
 
+/* ─── 13. CLIENTS (auto-scrolling logo carousel) ─── */
+function ClientRow({ items, dir, active }) {
+  return (
+    <div
+      dir="ltr"
+      style={{
+        direction: "ltr",
+        overflow: "hidden",
+        height: 78,
+        WebkitMaskImage: "linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent)",
+        maskImage: "linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent)",
+      }}
+    >
+      <div style={{ display: "flex", width: "max-content", height: "100%", alignItems: "center", willChange: "transform", animation: active ? `${dir} 40s linear infinite` : "none" }}>
+        {[...items, ...items].map((src, i) => (
+          <div
+            key={i}
+            style={{
+              flex: "0 0 auto",
+              height: 78,
+              width: 156,
+              marginInlineEnd: 16,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: B.white,
+              border: `1px solid ${B.athensGray}`,
+              borderRadius: 14,
+              boxShadow: "0 2px 10px rgba(23,33,52,0.04)",
+              padding: "12px 20px",
+            }}
+          >
+            <img src={encodeURI(src)} alt="" style={{ maxHeight: 46, maxWidth: "100%", objectFit: "contain", display: "block" }} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Clients({ slide, active, accent, circlePos }) {
+  const logos = slide.logos.map((f) => A(`/logos/${f}`));
+  const half = Math.ceil(logos.length / 2);
+  const row1 = logos.slice(0, half);
+  const row2 = logos.slice(half);
+  return (
+    <SlideWrap active={active}>
+      <DecoCircle color={accent} position={circlePos} />
+      <div style={{ zIndex: 2, maxWidth: 1320, width: "100%" }}>
+        <SlideHead title={slide.title} subtitle={slide.subtitle} active={active} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 16, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(24px)", transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 500ms" }}>
+          <ClientRow items={row1} dir="marqueeLeft" active={active} />
+          <ClientRow items={row2} dir="marqueeRight" active={active} />
+        </div>
+      </div>
+    </SlideWrap>
+  );
+}
+
 /* ─── 14. BRAND REVEAL ─── */
 function BrandReveal({ slide, active, accent, circlePos }) {
   return (
@@ -1109,8 +1275,8 @@ function BrandReveal({ slide, active, accent, circlePos }) {
         <div style={{ fontSize: "clamp(15px, 2vw, 20px)", fontWeight: 400, color: B.gullGray, marginBottom: 22, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 200ms" }}>
           {slide.eyebrow}
         </div>
-        <div style={{ marginBottom: 14 }}>
-          <img src={A("/bd-logo-full.svg")} alt="Boardirector" style={{ height: "clamp(72px, 12vw, 120px)", width: "auto", display: "inline-block", opacity: active ? 1 : 0, transform: active ? "scale(1)" : "scale(0.88)", transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 350ms" }} />
+        <div style={{ marginBottom: 14, opacity: active ? 1 : 0, transform: active ? "scale(1)" : "scale(0.88)", transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 350ms" }}>
+          <BDLogo size={96} />
         </div>
         <div style={{ fontSize: "clamp(40px, 7vw, 76px)", fontWeight: 900, lineHeight: 1, marginBottom: 34, background: `linear-gradient(135deg, ${B.orange} 0%, ${B.royalBlue} 100%)`, backgroundSize: "200% auto", animation: active ? "shimmer 5s linear infinite" : "none", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(24px)", transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 480ms" }}>
           {slide.brand}
@@ -1156,7 +1322,7 @@ function PracticeStep({ slide, active, accent, circlePos }) {
             </div>
             <div style={{ fontSize: "clamp(16px, 2vw, 21px)", fontWeight: 800, color: B.bigStone }}>{slide.stepTitle}</div>
             <div style={{ display: "flex", alignItems: "center", gap: 5, marginInlineStart: 4 }}>
-              {[1, 2, 3].map((n) => (
+              {Array.from({ length: slide.totalSteps || 3 }, (_, i) => i + 1).map((n) => (
                 <span key={n} style={{ width: n === slide.step ? 16 : 7, height: 7, borderRadius: 4, background: n === slide.step ? c : B.athensGray, transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }} />
               ))}
             </div>

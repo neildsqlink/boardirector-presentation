@@ -1404,7 +1404,7 @@ function useChatCycle(active) {
 }
 
 /* ─── 8. MEETING PAGE + AI AGENDA POPUP ─── */
-function MeetingPageAI({ slide, active, accent, circlePos }) {
+export function MeetingPageAI({ slide, active, accent, circlePos }) {
   const shown = useAgendaCycle(active, slide.agendaItems.length, 1400, 3000);
   return (
     <SlideWrap active={active}>
@@ -1548,7 +1548,7 @@ function AIAgendaPopup({ slide, active, shown }) {
 }
 
 /* ─── 9. MEETING BOOK + AI CHAT ─── */
-function MeetingBookChat({ slide, active, accent, circlePos }) {
+export function MeetingBookChat({ slide, active, accent, circlePos }) {
   const tick = useChatCycle(active);
   const userQ = slide.question;
   const aiA = slide.answer;
@@ -1683,7 +1683,7 @@ function useTaskCycle(active) {
 
 const clamp01 = (v) => Math.max(0, Math.min(1, v));
 
-function DecisionTracker({ slide, active, accent, circlePos }) {
+export function DecisionTracker({ slide, active, accent, circlePos }) {
   const tick = useTaskCycle(active);
   const t = slide.task;
   // Phases (viewer sees the decision-tracker page for ~6s before the drawer opens)
@@ -2010,7 +2010,7 @@ function useApprovalCycle(active) {
   return tick;
 }
 
-function MinutesApproval({ slide, active, accent, circlePos }) {
+export function MinutesApproval({ slide, active, accent, circlePos }) {
   const tick = useApprovalCycle(active);
   const memberCount = slide.members.length;
   const checkStart = 1500;
