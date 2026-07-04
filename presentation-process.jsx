@@ -83,19 +83,19 @@ const SLIDES = [
     subtitle: "היא מתחילה הרבה קודם – וממשיכה הרבה אחרי.",
     columns: [
       {
-        tag: "לפני",
+        tag: "לפני הישיבה",
         color: "royalBlue",
         items: ["תוכנית עבודה שנתית", "איסוף חומרים", "בניית סדרי יום", "הפצה ועדכונים", "הרשאות לכל משתתף"],
       },
       {
-        tag: "הישיבה",
+        tag: "במהלך הישיבה",
         color: "orange",
-        items: ["דיון", "החלטות"],
+        items: ["דיון", "הצבעות", "החלטות"],
       },
       {
-        tag: "אחרי",
+        tag: "אחרי הישיבה",
         color: "teal",
-        items: ["הפקת פרוטוקול", "העברה להערות", "נעילה וחתימה", "החלטות → משימות", "מעקב ביצוע"],
+        items: ["הפקת פרוטוקול", "אישור וחתימה", "החלטות → משימות", "מעקב ביצוע"],
       },
     ],
     footer: "ובעוד שנתיים, כשישאלו איך ולמה התקבלה החלטה – צריך להראות את התמונה המלאה. לא רק את הפרוטוקול.",
@@ -104,8 +104,8 @@ const SLIDES = [
   {
     id: "tools",
     type: "tools-grid",
-    title: "כלי מצוין לכל שלב",
-    subtitle: "מסתכלים על כל שלב בנפרד – וכמעט תמיד מוצאים כלי מצוין.",
+    title: "לכל שלב – הכלי שלו",
+    subtitle: "מסתכלים על כל שלב בנפרד – וכמעט תמיד מוצאים בדיוק את הכלי המתאים.",
     tools: [
       { icon: "folder", title: "ניהול מסמכים", color: "royalBlue" },
       { icon: "signature", title: "חתימות והצבעות", color: "orange" },
@@ -114,10 +114,10 @@ const SLIDES = [
     ],
     footer: "כל מערכת עושה את שלה – אבל זה תהליך, לא אוסף משימות. האחריות נשארת אצל הארגון, אבל השליטה מתפזרת.",
   },
-  // 7. FAILURES HAPPEN IN THE TRANSITIONS
+  // 7. FAILURES IN THE TRANSITIONS + THE AUDIT QUESTION (merged)
   {
-    id: "transitions",
-    type: "transitions",
+    id: "gaps-audit",
+    type: "gaps-audit",
     title: "הכשלים קורים במעברים",
     subtitle: "כמעט אף פעם לא בתוך שלב – אלא במה שמחבר ביניהם.",
     examples: [
@@ -125,14 +125,8 @@ const SLIDES = [
       { icon: "shield", text: "מסמך שלא ברור מי רשאי לראות" },
       { icon: "target", text: "החלטה שאושרה – אבל לא הפכה למשימה" },
     ],
-    footer: "לא כי מישהו טעה. אלא כי אין גורם אחד שמאגד את התמונה כולה.",
-  },
-  // 11. WHEN THE AUDIT COMES
-  {
-    id: "audit",
-    type: "audit",
-    title: "וכשמגיעה ביקורת",
-    subtitle: "השאלה כבר לא רק מה הוחלט –",
+    auditTitle: "וכשמגיעה ביקורת",
+    auditIntro: "השאלה כבר לא רק מה הוחלט –",
     questions: [
       { q: "איך?", desc: "התקבלה ההחלטה" },
       { q: "מי?", desc: "היה מעורב בדרך" },
@@ -164,82 +158,74 @@ const SLIDES = [
     ],
     transition: "ואיך זה נראה בפועל?",
   },
-  // 10. IN PRACTICE — before the meeting (animated: AI agenda builder)
+  // 10. IN PRACTICE — one slide, animations auto-cycle under 3 headers
   {
-    id: "practice-before",
-    type: "meeting-page-ai",
+    id: "walkthrough",
+    type: "walkthrough-cycle",
     title: "ואיך זה נראה בפועל?",
-    subtitle: "לפני הישיבה — סדר היום נגזר מתוכנית העבודה, וה‑AI מציע את הסעיפים.",
-    screenshot: A("/screenshots/meeting-page.png"),
-    aiLabel: "AI Agenda Builder",
-    aiHeadline: "בונה סדר יום אוטומטי",
-    aiCaption: "מבוסס על תוכנית העבודה השנתית ודרישות הרגולציה",
-    agendaItems: [
-      "פתיחה והודעות יו״ר",
-      "אישור פרוטוקול קודם",
-      "סקירת תוכנית העבודה",
-      "עדכוני ועדות משנה",
-      "קבלת החלטות",
+    headers: ["לפני הישיבה", "במהלך הישיבה", "אחרי הישיבה"],
+    frames: [
+      {
+        stage: 0,
+        dwell: 9000,
+        type: "meeting-page-ai",
+        title: "לפני הישיבה",
+        subtitle: "סדר היום נגזר מתוכנית העבודה, וה‑AI מציע את הסעיפים.",
+        screenshot: A("/screenshots/meeting-page.png"),
+        aiLabel: "AI Agenda Builder",
+        aiHeadline: "בונה סדר יום אוטומטי",
+        aiCaption: "מבוסס על תוכנית העבודה השנתית ודרישות הרגולציה",
+        agendaItems: ["פתיחה והודעות יו״ר", "אישור פרוטוקול קודם", "סקירת תוכנית העבודה", "עדכוני ועדות משנה", "קבלת החלטות"],
+      },
+      {
+        stage: 1,
+        dwell: 8500,
+        type: "minutes-approval",
+        title: "במהלך הישיבה",
+        subtitle: "הפרוטוקול נבנה מהדיון, עובר לאישור ונחתם דיגיטלית.",
+        screenshot: A("/screenshots/meeting-page.png"),
+        panelTitle: "אישור פרוטוקול",
+        meetingName: "ישיבת ועדת מכרזים · Q3 2026",
+        members: [
+          { name: "דנה לוי", role: "יו״ר" },
+          { name: "אבי כהן", role: "דירקטור" },
+          { name: "רונית גולן", role: "דירקטורית" },
+          { name: "משה ברק", role: "דירקטור" },
+          { name: "שרה דוד", role: "מבקרת" },
+        ],
+        buttonLabel: "שלח לחתימה דיגיטלית",
+        sentLabel: "נשלח לחתימה",
+      },
+      {
+        stage: 2,
+        dwell: 12500,
+        type: "decision-tracker",
+        title: "אחרי הישיבה",
+        subtitle: "כל החלטה הופכת למשימה עם אחראי, יעד ומעקב.",
+        screenshot: A("/screenshots/decision-tracker.png"),
+        highlights: [
+          { icon: "target", text: "כל החלטה מקושרת לוועדה, לנושא ולישיבה" },
+          { icon: "user", text: "אחראי, סטטוס ותאריך יעד לכל פריט" },
+          { icon: "check", text: "מעקב משימות שנגזרו מההחלטה" },
+          { icon: "search", text: "סינון לפי ועדה, תאריך ומצב ביצוע" },
+        ],
+        footer: "בכל רגע רואים מה הושלם, מה בטיפול, ומה עדיין פתוח.",
+        task: {
+          panelTitle: "צור משימה חדשה",
+          aiTag: "AI ממלא טופס מההחלטה",
+          status: "לעשות",
+          name: "מעקב יישום המלצות מכרז 24/2026",
+          assignee: "בר לב",
+          dueDate: "30/09/2026",
+          priority: "גבוהה",
+          description: "מעקב אחרי יישום המלצות הוועדה לבחירת ספק במכרז 24/2026. נדרש דיווח חודשי על ההתקדמות והעמידה ב‑SLA.",
+          connection: "החלטה · מכרז 24/2026 · ועדת מכרזים 12.4.2026",
+          cancelLabel: "ביטול",
+          createLabel: "צור",
+          createdLabel: "נוצר",
+        },
+      },
     ],
-  },
-  // 11. IN PRACTICE — during the meeting (animated: digital signature)
-  {
-    id: "practice-during",
-    type: "minutes-approval",
-    title: "ואיך זה נראה בפועל?",
-    subtitle: "במהלך הישיבה — הפרוטוקול נבנה מהדיון, עובר לאישור ונחתם דיגיטלית.",
-    screenshot: A("/screenshots/meeting-page.png"),
-    panelTitle: "אישור פרוטוקול",
-    meetingName: "ישיבת ועדת מכרזים · Q3 2026",
-    members: [
-      { name: "דנה לוי", role: "יו״ר" },
-      { name: "אבי כהן", role: "דירקטור" },
-      { name: "רונית גולן", role: "דירקטורית" },
-      { name: "משה ברק", role: "דירקטור" },
-      { name: "שרה דוד", role: "מבקרת" },
-    ],
-    buttonLabel: "שלח לחתימה דיגיטלית",
-    sentLabel: "נשלח לחתימה",
-  },
-  // 12. IN PRACTICE — after the meeting (animated: decision → task drawer)
-  {
-    id: "practice-after",
-    type: "decision-tracker",
-    title: "ואיך זה נראה בפועל?",
-    subtitle: "אחרי הישיבה — כל החלטה הופכת למשימה עם אחראי, יעד ומעקב.",
-    screenshot: A("/screenshots/decision-tracker.png"),
-    highlights: [
-      { icon: "target", text: "כל החלטה מקושרת לוועדה, לנושא ולישיבה" },
-      { icon: "user", text: "אחראי, סטטוס ותאריך יעד לכל פריט" },
-      { icon: "check", text: "מעקב משימות שנגזרו מההחלטה" },
-      { icon: "search", text: "סינון לפי ועדה, תאריך ומצב ביצוע" },
-    ],
-    footer: "בכל רגע רואים מה הושלם, מה בטיפול, ומה עדיין פתוח.",
-    task: {
-      panelTitle: "צור משימה חדשה",
-      aiTag: "AI ממלא טופס מההחלטה",
-      status: "לעשות",
-      name: "מעקב יישום המלצות מכרז 24/2026",
-      assignee: "בר לב",
-      dueDate: "30/09/2026",
-      priority: "גבוהה",
-      description: "מעקב אחרי יישום המלצות הוועדה לבחירת ספק במכרז 24/2026. נדרש דיווח חודשי על ההתקדמות והעמידה ב‑SLA.",
-      connection: "החלטה · מכרז 24/2026 · ועדת מכרזים 12.4.2026",
-      cancelLabel: "ביטול",
-      createLabel: "צור",
-      createdLabel: "נוצר",
-    },
-  },
-  // 13. IN PRACTICE — AI inside the process (animated: AI document chat)
-  {
-    id: "practice-ai",
-    type: "meeting-book-chat",
-    title: "ואיך זה נראה בפועל?",
-    subtitle: "לאורך כל התהליך — ה‑AI עונה מתוך ההקשר המלא של הישיבה.",
-    screenshot: A("/screenshots/meeting-book.png"),
-    aiLabel: "AI Document Assistant",
-    question: "מה הוחלט במכרז ספקי ה‑IT האחרון?",
-    answer: "בישיבת ועדת המכרזים מ‑12.4.2026 אושרו המלצות הוועדה לבחירת הספק המוביל למכרז 24/2026. ההחלטה התקבלה פה אחד על ידי 5 חברי הוועדה.",
   },
   // 13. CLIENTS — social proof carousel
   {
@@ -276,19 +262,13 @@ const SLIDES = [
       "delek.png",
     ],
   },
-  // 16. CLOSING THOUGHT
+  // 12. CLOSING — question → conclusion → thanks (merged)
   {
-    id: "thought",
-    type: "two-questions",
+    id: "closing",
+    type: "closing",
     eyebrow: "מחשבה אחת להשאיר אתכם איתה",
-    intro: "בפעם הבאה שאתם בוחנים את תהליך קבלת ההחלטות בארגון שלכם –",
-    dim: "אל תשאלו רק: האם יש כלי לכל שלב?",
-    bright: "תשאלו: מי מנהל את התהליך כולו?",
-  },
-  // 17. FINAL
-  {
-    id: "final",
-    type: "final",
+    dim: "לא איזה כלי יש לכל שלב",
+    bright: "אלא – מי מנהל את התהליך כולו?",
     lines: ["ניהול ועדות והחלטות", "הוא לא אוסף של כלים.", "הוא תהליך אחד."],
     thanks: "תודה",
     speaker: "בר לב · Boardirector",
@@ -308,16 +288,15 @@ const ACCENTS = {
   process: "red",
   transitions: "orange",
   audit: "red",
+  "gaps-audit": "red",
   evolution: "royalBlue",
   system: "teal",
   brand: "royalBlue",
   chain: "teal",
-  "practice-before": "royalBlue",
-  "practice-during": "orange",
-  "practice-after": "teal",
-  "practice-ai": "royalBlue",
+  walkthrough: "royalBlue",
   clients: "royalBlue",
   thought: "orange",
+  closing: "royalBlue",
   final: "royalBlue",
 };
 
@@ -341,8 +320,11 @@ const CIRCLE_POS = {
   "practice-during": { top: "-120px", right: "-120px", left: "auto" },
   "practice-after": { bottom: "-180px", left: "-180px", right: "auto", top: "auto" },
   "practice-ai": { top: "-130px", right: "-130px", left: "auto" },
+  "gaps-audit": { top: "-130px", right: "-130px", left: "auto" },
+  walkthrough: { top: "-130px", right: "-130px", left: "auto" },
   clients: { top: "-130px", right: "-130px", left: "auto" },
   thought: { top: "-130px", right: "-130px", left: "auto" },
+  closing: { top: "-150px", left: "-150px", right: "auto" },
   final: { top: "-150px", left: "-150px", right: "auto" },
 };
 
@@ -759,10 +741,12 @@ function renderSlide(slide, idx, active, accent, circlePos) {
     case "split-contrast": return <SplitContrast key={k} {...common} />;
     case "transitions": return <Transitions key={k} {...common} />;
     case "audit": return <Audit key={k} {...common} />;
+    case "gaps-audit": return <GapsAudit key={k} {...common} />;
     case "evolution": return <Evolution key={k} {...common} />;
     case "approach": return <Approach key={k} {...common} />;
     case "brand-reveal": return <BrandReveal key={k} {...common} />;
     case "practice-step": return <PracticeStep key={k} {...common} />;
+    case "walkthrough-cycle": return <WalkthroughCycle key={k} {...common} />;
     case "meeting-page-ai": return <MeetingPageAI key={k} {...common} />;
     case "minutes-approval": return <MinutesApproval key={k} {...common} />;
     case "decision-tracker": return <DecisionTracker key={k} {...common} />;
@@ -770,6 +754,7 @@ function renderSlide(slide, idx, active, accent, circlePos) {
     case "clients": return <Clients key={k} {...common} />;
     case "chain": return <Chain key={k} {...common} />;
     case "two-questions": return <TwoQuestions key={k} {...common} />;
+    case "closing": return <Closing key={k} {...common} />;
     case "final": return <Final key={k} {...common} />;
     default: return null;
   }
@@ -815,31 +800,31 @@ function TransformList({ slide, active, accent, circlePos }) {
   return (
     <SlideWrap active={active}>
       <DecoCircle color={accent} position={circlePos} />
-      <div style={{ zIndex: 2, maxWidth: 940, width: "100%" }}>
-        <div style={{ fontSize: "clamp(26px, 4.2vw, 40px)", fontWeight: 800, color: B.bigStone, textAlign: "center", marginBottom: 12, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(20px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 200ms" }}>
+      <div style={{ zIndex: 2, maxWidth: 1240, width: "100%" }}>
+        <div style={{ fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 800, color: B.bigStone, textAlign: "center", marginBottom: 14, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(20px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 200ms" }}>
           {slide.title}
         </div>
-        <div style={{ fontSize: "clamp(14px, 1.8vw, 18px)", fontWeight: 300, color: B.gullGray, lineHeight: 1.6, textAlign: "center", marginBottom: 32, maxWidth: 720, marginInline: "auto", opacity: active ? 1 : 0, transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 380ms" }}>
+        <div style={{ fontSize: "clamp(16px, 2vw, 21px)", fontWeight: 300, color: B.gullGray, lineHeight: 1.6, textAlign: "center", marginBottom: 40, maxWidth: 860, marginInline: "auto", opacity: active ? 1 : 0, transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 380ms" }}>
           {slide.intro}
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
           {slide.pairs.map((it, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 18px", borderRadius: 14, background: B.white, border: `1px solid ${B.athensGray}`, boxShadow: "0 2px 10px rgba(23,33,52,0.04)", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(24px)", transition: `all 0.65s cubic-bezier(0.16, 1, 0.3, 1) ${500 + i * 110}ms` }}>
-              <div style={{ width: 42, height: 42, borderRadius: 12, background: `${accent}12`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <FlatIcon name={it.icon} size={21} color={accent} />
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 20, padding: "22px 28px", borderRadius: 18, background: B.white, border: `1px solid ${B.athensGray}`, boxShadow: "0 4px 16px rgba(23,33,52,0.05)", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(24px)", transition: `all 0.65s cubic-bezier(0.16, 1, 0.3, 1) ${500 + i * 110}ms` }}>
+              <div style={{ width: 60, height: 60, borderRadius: 16, background: `${accent}12`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <FlatIcon name={it.icon} size={30} color={accent} />
               </div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 15, fontWeight: 700, color: B.bigStone, marginBottom: 3 }}>{it.label}</div>
-                <div dir="rtl" style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13 }}>
+                <div style={{ fontSize: "clamp(18px, 2vw, 22px)", fontWeight: 700, color: B.bigStone, marginBottom: 5 }}>{it.label}</div>
+                <div dir="rtl" style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "clamp(14px, 1.6vw, 17px)" }}>
                   <span style={{ color: B.cadetBlue, textDecoration: "line-through", textDecorationColor: `${B.red}80` }}>{it.from}</span>
-                  <span style={{ color: B.gullGray, fontSize: 14 }}>←</span>
+                  <span style={{ color: B.gullGray, fontSize: 17 }}>←</span>
                   <span style={{ color: B.green, fontWeight: 600 }}>{it.to}</span>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <div style={{ marginTop: 28, textAlign: "center", fontSize: "clamp(14px, 1.9vw, 19px)", fontWeight: 500, color: B.bigStone, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1250ms" }}>
+        <div style={{ marginTop: 36, textAlign: "center", fontSize: "clamp(16px, 2.1vw, 22px)", fontWeight: 500, color: B.bigStone, maxWidth: 1000, marginInline: "auto", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1250ms" }}>
           {slide.footer}
         </div>
       </div>
@@ -966,34 +951,79 @@ function BeforeAfter({ slide, active, accent, circlePos }) {
 }
 
 /* ─── 7. LIFECYCLE (before / during / after) ─── */
+// Sequential "traveling highlight" across a total number of steps, looping.
+function useSeqCycle(active, total, stepMs = 650, pauseMs = 1800) {
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    if (!active) {
+      setN(0);
+      return;
+    }
+    const cycle = total * stepMs + pauseMs;
+    const start = Date.now();
+    const id = setInterval(() => {
+      const e = (Date.now() - start) % cycle;
+      setN(Math.min(total, Math.floor(e / stepMs)));
+    }, 90);
+    return () => clearInterval(id);
+  }, [active, total, stepMs, pauseMs]);
+  return n;
+}
+
 function Lifecycle({ slide, active, accent, circlePos }) {
+  // Flatten items so a single highlight can travel through all stages in order.
+  const flat = [];
+  slide.columns.forEach((col, ci) => col.items.forEach((it) => flat.push({ text: it, color: tone(col.color), ci })));
+  const shown = useSeqCycle(active, flat.length, 620, 2000);
+  let running = 0;
   return (
     <SlideWrap active={active}>
       <DecoCircle color={accent} position={circlePos} />
-      <div style={{ zIndex: 2, maxWidth: 1180, width: "100%" }}>
+      <div style={{ zIndex: 2, maxWidth: 1240, width: "100%" }}>
         <SlideHead title={slide.title} subtitle={slide.subtitle} active={active} />
-        <div style={{ display: "flex", alignItems: "stretch", gap: 14 }}>
+        <div style={{ display: "flex", alignItems: "stretch", gap: 0 }}>
           {slide.columns.map((col, ci) => {
             const c = tone(col.color);
-            const isMeeting = ci === 1;
+            const startIdx = running;
+            running += col.items.length;
+            const last = ci === slide.columns.length - 1;
             return (
-              <div key={ci} style={{ display: "flex", alignItems: "stretch", flex: isMeeting ? "0 0 auto" : 1 }}>
-                <div style={{ flex: 1, minWidth: isMeeting ? 150 : 0, padding: "22px 20px", borderRadius: 18, background: isMeeting ? c : B.white, border: `1px solid ${isMeeting ? c : B.athensGray}`, boxShadow: isMeeting ? `0 12px 34px ${c}30` : "0 3px 14px rgba(23,33,52,0.05)", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(30px)", transition: `all 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${450 + ci * 200}ms` }}>
-                  <div style={{ display: "inline-block", padding: "4px 14px", borderRadius: 999, background: isMeeting ? "rgba(255,255,255,0.22)" : `${c}14`, color: isMeeting ? B.white : c, fontSize: 13, fontWeight: 800, letterSpacing: 1, marginBottom: 16 }}>
+              <div key={ci} style={{ display: "flex", alignItems: "stretch", flex: 1 }}>
+                <div style={{ flex: 1, padding: "24px 22px 26px", borderRadius: 20, background: B.white, border: `1.5px solid ${c}33`, boxShadow: `0 10px 30px ${c}14`, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(30px)", transition: `all 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${400 + ci * 180}ms` }}>
+                  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 16px", borderRadius: 999, background: `${c}14`, color: c, fontSize: "clamp(13px, 1.5vw, 16px)", fontWeight: 800, letterSpacing: 0.5, marginBottom: 18 }}>
+                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: c }} />
                     {col.tag}
                   </div>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
-                    {col.items.map((it, ii) => (
-                      <div key={ii} style={{ display: "flex", alignItems: "center", gap: 9, fontSize: "clamp(12px, 1.4vw, 15px)", fontWeight: isMeeting ? 700 : 500, color: isMeeting ? B.white : B.bigStone }}>
-                        <span style={{ width: 6, height: 6, borderRadius: "50%", background: isMeeting ? B.white : c, flexShrink: 0 }} />
-                        {it}
-                      </div>
-                    ))}
+                  <div style={{ display: "flex", flexDirection: "column", gap: 11 }}>
+                    {col.items.map((it, ii) => {
+                      const gi = startIdx + ii;
+                      const on = gi < shown;
+                      const cur = gi === shown - 1;
+                      return (
+                        <div key={ii} style={{ display: "flex", alignItems: "center", gap: 11, fontSize: "clamp(13px, 1.5vw, 17px)", fontWeight: on ? 600 : 400, color: on ? B.bigStone : B.cadetBlue, transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)", transform: cur ? "translateX(-4px)" : "translateX(0)" }}>
+                          <span
+                            style={{
+                              width: 14,
+                              height: 14,
+                              borderRadius: "50%",
+                              background: on ? c : "transparent",
+                              border: on ? "none" : `2px solid ${B.athensGray}`,
+                              boxShadow: cur ? `0 0 0 5px ${c}22` : "none",
+                              flexShrink: 0,
+                              transition: "all 0.35s ease",
+                              animation: cur ? "breathe 1.2s ease-in-out infinite" : "none",
+                            }}
+                          />
+                          {it}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
-                {ci < slide.columns.length - 1 && (
-                  <div style={{ display: "flex", alignItems: "center", padding: "0 4px", fontSize: 24, color: B.cadetBlue, opacity: active ? 1 : 0, transition: `all 0.6s ease ${700 + ci * 200}ms` }}>
-                    ←
+                {!last && (
+                  <div style={{ width: 46, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+                    <div style={{ position: "absolute", left: 6, right: 6, top: "50%", height: 3, borderRadius: 2, background: `linear-gradient(90deg, transparent, ${accent}, transparent)`, backgroundSize: "200% 100%", animation: active ? "shimmer 2.4s linear infinite" : "none", opacity: active ? 1 : 0 }} />
+                    <div style={{ fontSize: 22, color: c, position: "relative", opacity: active ? 1 : 0, transition: `all 0.6s ease ${700 + ci * 180}ms` }}>←</div>
                   </div>
                 )}
               </div>
@@ -1445,6 +1475,181 @@ function Final({ slide, active, accent, circlePos }) {
           </div>
         </div>
         <div style={{ fontSize: 13, color: B.gullGray, opacity: active ? 1 : 0, transition: "all 0.7s ease 1350ms" }}>
+          {slide.speaker}
+        </div>
+      </div>
+    </SlideWrap>
+  );
+}
+
+/* ─── 7. GAPS + AUDIT (merged) ─── */
+function GapsAudit({ slide, active, accent, circlePos }) {
+  return (
+    <SlideWrap active={active}>
+      <DecoCircle color={accent} position={circlePos} />
+      <div style={{ zIndex: 2, maxWidth: 1120, width: "100%" }}>
+        <div style={{ textAlign: "center", marginBottom: 22 }}>
+          <div style={{ fontSize: "clamp(26px, 4.2vw, 42px)", fontWeight: 800, color: B.bigStone, marginBottom: 8, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(20px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 200ms" }}>
+            {slide.title}
+          </div>
+          <div style={{ fontSize: "clamp(13px, 1.7vw, 17px)", fontWeight: 300, color: B.gullGray, opacity: active ? 1 : 0, transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 350ms" }}>
+            {slide.subtitle}
+          </div>
+        </div>
+        {/* Transition failure cards */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14, marginBottom: 26 }}>
+          {slide.examples.map((ex, i) => (
+            <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 10, padding: "20px 16px", borderRadius: 14, background: B.white, border: `1px dashed ${B.red}55`, boxShadow: "0 2px 10px rgba(23,33,52,0.04)", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(22px)", transition: `all 0.65s cubic-bezier(0.16, 1, 0.3, 1) ${480 + i * 140}ms` }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                <span style={{ width: 12, height: 26, borderRadius: 4, background: `${B.royalBlue}22` }} />
+                <span style={{ width: 20, borderTop: `2px dashed ${B.red}` }} />
+                <span style={{ width: 12, height: 26, borderRadius: 4, background: `${B.teal}22` }} />
+              </div>
+              <div style={{ width: 40, height: 40, borderRadius: 11, background: `${B.red}10`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <FlatIcon name={ex.icon} size={20} color={B.red} />
+              </div>
+              <div style={{ fontSize: "clamp(13px, 1.5vw, 16px)", fontWeight: 600, color: B.bigStone, lineHeight: 1.4 }}>{ex.text}</div>
+            </div>
+          ))}
+        </div>
+        {/* Audit strip */}
+        <div style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap", justifyContent: "center", padding: "18px 24px", borderRadius: 16, background: `${B.bigStone}`, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(20px)", transition: "all 0.75s cubic-bezier(0.16, 1, 0.3, 1) 950ms" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ width: 42, height: 42, borderRadius: 12, background: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <FlatIcon name="scale" size={22} color={B.white} />
+            </div>
+            <div style={{ textAlign: "right" }}>
+              <div style={{ fontSize: "clamp(16px, 2vw, 21px)", fontWeight: 800, color: B.white }}>{slide.auditTitle}</div>
+              <div style={{ fontSize: "clamp(12px, 1.4vw, 14px)", fontWeight: 300, color: "rgba(255,255,255,0.65)" }}>{slide.auditIntro}</div>
+            </div>
+          </div>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
+            {slide.questions.map((q, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "baseline", gap: 7, padding: "8px 16px", borderRadius: 999, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.14)" }}>
+                <span style={{ fontSize: "clamp(15px, 1.8vw, 19px)", fontWeight: 900, color: B.orangeLight }}>{q.q}</span>
+                <span style={{ fontSize: "clamp(11px, 1.3vw, 13px)", fontWeight: 300, color: "rgba(255,255,255,0.75)" }}>{q.desc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div style={{ marginTop: 22, textAlign: "center", fontSize: "clamp(16px, 2.2vw, 23px)", fontWeight: 700, background: `linear-gradient(90deg, ${B.red}, ${B.orange})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1250ms" }}>
+          {slide.footer}
+        </div>
+      </div>
+    </SlideWrap>
+  );
+}
+
+/* ─── 10. WALKTHROUGH CYCLE — auto-advancing animated demos under 3 headers ─── */
+const WALK_DEMOS = {
+  "meeting-page-ai": MeetingPageAI,
+  "minutes-approval": MinutesApproval,
+  "decision-tracker": DecisionTracker,
+  "meeting-book-chat": MeetingBookChat,
+};
+
+function WalkthroughCycle({ slide, active, accent, circlePos }) {
+  const frames = slide.frames;
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    if (!active) {
+      setIdx(0);
+      return;
+    }
+    const dwell = frames[idx]?.dwell || 9000;
+    const t = setTimeout(() => setIdx((i) => (i + 1) % frames.length), dwell);
+    return () => clearTimeout(t);
+  }, [active, idx, frames]);
+
+  const frame = frames[idx];
+  const Comp = WALK_DEMOS[frame.type];
+  const demoSlide = { ...frame, title: slide.title };
+  const gradient = `linear-gradient(135deg, ${B.orange}, ${B.royalBlue})`;
+
+  return (
+    <>
+      {Comp && <Comp key={idx} slide={demoSlide} active={active} accent={accent} circlePos={circlePos} />}
+      {/* 3-header stepper */}
+      <div style={{ position: "absolute", top: 54, left: 0, right: 0, display: "flex", justifyContent: "center", alignItems: "center", gap: 8, zIndex: 8, pointerEvents: "none", opacity: active ? 1 : 0, transition: "opacity 0.5s ease 0.3s" }}>
+        {slide.headers.map((h, i) => {
+          const on = i === frame.stage;
+          return (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <div style={{ padding: "7px 18px", borderRadius: 999, fontSize: "clamp(12px, 1.4vw, 15px)", fontWeight: 800, background: on ? gradient : "rgba(255,255,255,0.92)", color: on ? B.white : B.gullGray, border: on ? "none" : `1px solid ${B.athensGray}`, boxShadow: on ? `0 6px 18px ${B.orange}44` : "0 1px 5px rgba(23,33,52,0.06)", transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)", backdropFilter: "blur(4px)" }}>
+                {h}
+              </div>
+              {i < slide.headers.length - 1 && <span style={{ fontSize: 15, color: B.cadetBlue }}>←</span>}
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+}
+
+/* ─── 12. CLOSING — question → conclusion → thanks (merged) ─── */
+function Closing({ slide, active, accent, circlePos }) {
+  return (
+    <SlideWrap active={active}>
+      <DecoCircle color={accent} position={circlePos} />
+      <DecoCircle color={B.orange} position={{ bottom: "-200px", right: "-200px", left: "auto", top: "auto" }} size={400} opacity={0.06} />
+      <ParticleField count={10} color={accent} />
+      <div style={{ zIndex: 2, maxWidth: 940, width: "100%", textAlign: "center" }}>
+        <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: 4, color: B.orange, marginBottom: 18, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 150ms" }}>
+          {slide.eyebrow}
+        </div>
+        {/* Question contrast */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, marginBottom: 30 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "clamp(15px, 2vw, 20px)", fontWeight: 500, color: B.gullGray, opacity: active ? 0.75 : 0, transform: active ? "translateY(0)" : "translateY(12px)", transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 400ms" }}>
+            <span style={{ width: 24, height: 24, borderRadius: 7, background: `${B.cadetBlue}20`, color: B.cadetBlue, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 800, flexShrink: 0 }}>✕</span>
+            <span style={{ textDecoration: "line-through", textDecorationColor: `${B.cadetBlue}80` }}>{slide.dim}</span>
+          </div>
+          <div style={{ fontSize: "clamp(20px, 3vw, 30px)", fontWeight: 800, color: B.bigStone, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(14px)", transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 650ms" }}>
+            {slide.bright}
+          </div>
+        </div>
+        {/* Divider */}
+        <div style={{ width: 60, height: 3, borderRadius: 2, background: `linear-gradient(90deg, ${B.orange}, ${B.royalBlue})`, margin: "0 auto 26px", opacity: active ? 1 : 0, transition: "all 0.7s ease 900ms" }} />
+        {/* Conclusion */}
+        <div style={{ marginBottom: 22 }}>
+          {slide.lines.map((ln, i) => {
+            const isLast = i === slide.lines.length - 1;
+            return (
+              <div
+                key={i}
+                style={{
+                  fontSize: "clamp(26px, 4.4vw, 46px)",
+                  fontWeight: 900,
+                  lineHeight: 1.2,
+                  color: isLast ? "transparent" : B.bigStone,
+                  background: isLast ? `linear-gradient(135deg, ${B.orange}, ${B.royalBlue})` : "none",
+                  WebkitBackgroundClip: isLast ? "text" : "border-box",
+                  WebkitTextFillColor: isLast ? "transparent" : B.bigStone,
+                  opacity: active ? 1 : 0,
+                  transform: active ? "translateY(0)" : "translateY(18px)",
+                  transition: `all 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${1050 + i * 160}ms`,
+                }}
+              >
+                {ln}
+              </div>
+            );
+          })}
+        </div>
+        {/* Thanks + contact */}
+        <div style={{ fontSize: "clamp(28px, 4.5vw, 48px)", fontWeight: 800, color: B.bigStone, marginBottom: 18, opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(15px)", transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1600ms" }}>
+          {slide.thanks}
+        </div>
+        <div style={{ display: "flex", justifyContent: "center", gap: 22, marginBottom: 12, opacity: active ? 1 : 0, transition: "all 0.7s ease 1800ms", fontFamily: `'${B.fontEn}', sans-serif` }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: B.bigStone, fontWeight: 500 }}>
+            <FlatIcon name="mail" size={15} color={B.orange} />
+            {slide.contact.email}
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: B.bigStone, fontWeight: 500 }}>
+            <FlatIcon name="globe" size={15} color={B.royalBlue} />
+            {slide.contact.site}
+          </div>
+        </div>
+        <div style={{ fontSize: 12, color: B.gullGray, opacity: active ? 1 : 0, transition: "all 0.7s ease 1950ms" }}>
           {slide.speaker}
         </div>
       </div>
