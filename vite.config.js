@@ -12,6 +12,7 @@ import { resolve } from "path";
 //   /process/  → same keynote (kept so earlier links keep working)
 //   /nimbus/   → the older Nimbus SummIT deck
 //   /ramatgan/ → municipal pitch deck (עיריית רמת גן · Live Pitch 2026)
+//   /teams/    → Boardirector 2.0 app-demo deck (הדגמת מערכת)
 export default defineConfig({
   plugins: [react()],
   base: process.env.VITE_BASE || "/",
@@ -22,6 +23,7 @@ export default defineConfig({
         process: resolve(__dirname, "process/index.html"),
         nimbus: resolve(__dirname, "nimbus/index.html"),
         ramatgan: resolve(__dirname, "ramatgan/index.html"),
+        teams: resolve(__dirname, "teams/index.html"),
       },
     },
   },
